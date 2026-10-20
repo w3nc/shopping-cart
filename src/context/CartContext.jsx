@@ -33,7 +33,7 @@ function createInitialState(initialItems = []) {
     .filter((item) => item && item.id)
     .map((item) => ({
       id: item.id,
-      name: item.name ?? "Menu item",
+      title: item.title ?? "Menu item",
       price: Number(item.price) || 0,
       image: item.image ?? "",
       qty: clampQty(item.qty ?? MIN_QTY),
@@ -64,7 +64,7 @@ export function cartReducer(state, action) {
           ...state.items,
           {
             id: product.id,
-            name: product.name,
+            title: product.title,
             price: Number(product.price) || 0,
             image: product.image ?? "",
             qty: addQty,

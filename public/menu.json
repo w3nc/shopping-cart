@@ -1,74 +1,101 @@
 [
   {
-    "id": "classic-bucket",
-    "name": "The Classic Bucket",
-    "description": "Eight pieces of golden fried chicken with fries and slaw.",
-    "price": 899,
+    "id": 1,
+    "title": "Pollo Classic Combo",
+    "price": 9.99,
+    "category": "combos",
+    "description": "Half chicken, crispy skin, two sides, and a warm biscuit.",
     "image": "/images/menu/placeholder.svg",
-    "category": "chicken"
+    "altImage": "/images/menu/placeholder.svg",
+    "tags": ["Signature", "Crispy"],
+    "featured": true
   },
   {
-    "id": "spicy-bucket",
-    "name": "The Spicy Bucket",
-    "description": "Eight pieces tossed in our red spice blend, with fries and slaw.",
-    "price": 949,
+    "id": 2,
+    "title": "Hermanos Family Bucket",
+    "price": 24.99,
+    "category": "combos",
+    "description": "Twelve pieces of golden fried chicken with three large sides.",
     "image": "/images/menu/placeholder.svg",
-    "category": "chicken"
+    "altImage": "/images/menu/placeholder.svg",
+    "tags": ["Family", "Shareable"],
+    "featured": true
   },
   {
-    "id": "crispy-chicken-sandwich",
-    "name": "Crispy Chicken Sandwich",
-    "description": "Buttermilk chicken fillet, pickles and house sauce in a soft bun.",
-    "price": 189,
+    "id": 3,
+    "title": "Spicy Pollo Sandwich",
+    "price": 8.49,
+    "category": "chicken",
+    "description": "Buttermilk fillet tossed in red spice, pickles, and house sauce.",
     "image": "/images/menu/placeholder.svg",
-    "category": "chicken"
+    "altImage": "/images/menu/placeholder.svg",
+    "tags": ["Spicy", "Sandwich"],
+    "featured": true
   },
   {
-    "id": "fried-chicken-rice-bowl",
-    "name": "Fried Chicken Rice Bowl",
-    "description": "Chopped fried chicken over rice with gravy and spring onions.",
-    "price": 179,
+    "id": 4,
+    "title": "Pollo Wrap",
+    "price": 7.29,
+    "category": "chicken",
+    "description": "Crispy chicken strips, slaw, and ranch in a warm flour tortilla.",
     "image": "/images/menu/placeholder.svg",
-    "category": "chicken"
+    "altImage": "/images/menu/placeholder.svg",
+    "tags": ["Handheld", "Fresh"],
+    "featured": false
   },
   {
-    "id": "spicy-wings",
-    "name": "Spicy Wings",
-    "description": "Six wings glazed in our hot honey sauce.",
-    "price": 329,
+    "id": 5,
+    "title": "Curly Fries Basket",
+    "price": 4.49,
+    "category": "sides",
+    "description": "A generous basket of seasoned curly fries.",
     "image": "/images/menu/placeholder.svg",
-    "category": "chicken"
+    "altImage": "/images/menu/placeholder.svg",
+    "tags": ["Crispy", "Shareable"],
+    "featured": false
   },
   {
-    "id": "cheese-fries",
-    "name": "Loaded Cheese Fries",
-    "description": "Fresh cut fries under a slow melted cheese sauce.",
-    "price": 149,
+    "id": 6,
+    "title": "Hermanos Sauce Bottle",
+    "price": 6.99,
+    "category": "sides",
+    "description": "A take-home bottle of our signature dipping sauce.",
     "image": "/images/menu/placeholder.svg",
-    "category": "sides"
+    "altImage": "/images/menu/placeholder.svg",
+    "tags": ["Take home", "Signature"],
+    "featured": false
   },
   {
-    "id": "buttermilk-biscuits",
-    "name": "Buttermilk Biscuits",
-    "description": "Three warm biscuits with whipped honey butter.",
-    "price": 99,
+    "id": 7,
+    "title": "Fresh Lemonade",
+    "price": 3.29,
+    "category": "drinks",
+    "description": "House-squeezed lemonade served over ice.",
     "image": "/images/menu/placeholder.svg",
-    "category": "sides"
+    "altImage": "/images/menu/placeholder.svg",
+    "tags": ["Fresh", "Cold"],
+    "featured": false
   },
   {
-    "id": "creamy-coleslaw",
-    "name": "Creamy Coleslaw",
-    "description": "Shredded cabbage and carrot in a light creamy dressing.",
-    "price": 79,
+    "id": 8,
+    "title": "Sweet Tea",
+    "price": 2.99,
+    "category": "drinks",
+    "description": "Slow-brewed sweet tea, the house classic.",
     "image": "/images/menu/placeholder.svg",
-    "category": "sides"
+    "altImage": "/images/menu/placeholder.svg",
+    "tags": ["Classic", "Cold"],
+    "featured": false
   },
   {
-    "id": "sweet-iced-tea",
-    "name": "Sweet Iced Tea",
-    "description": "Large glass of house brewed iced tea, served over ice.",
-    "price": 69,
+    "id": 9,
+    "title": "Churro Bites",
+    "price": 5.49,
+    "category": "desserts",
+    "description": "Warm cinnamon sugar churro bites with a chocolate dip.",
     "image": "/images/menu/placeholder.svg",
-    "category": "drinks"
+    "altImage": "/images/menu/placeholder.svg",
+    "tags": ["Sweet", "Shareable"],
+    "featured": false
   }
 ]

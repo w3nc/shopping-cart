@@ -1,9 +1,11 @@
-const grouped = new Intl.NumberFormat("en-PH", {
+const formatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 });
 
 export function formatPrice(amount) {
   const value = Number(amount);
-  return `\u20B1${grouped.format(Number.isFinite(value) ? value : 0)}`;
+  return formatter.format(Number.isFinite(value) ? value : 0);
 }

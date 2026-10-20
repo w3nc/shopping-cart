@@ -18,7 +18,7 @@ export default function CartItem({ item }) {
       />
 
       <div className={styles.info}>
-        <h2 className={styles.name}>{item.name}</h2>
+        <h2 className={styles.name}>{item.title}</h2>
         <p className={styles.price}>{formatPrice(item.price)} each</p>
       </div>
 
@@ -37,7 +37,7 @@ export default function CartItem({ item }) {
         type="button"
         className={styles.remove}
         onClick={() => removeItem(item.id)}
-        aria-label={`Remove ${item.name} from cart`}
+        aria-label={`Remove ${item.title} from cart`}
       >
         Remove
       </button>

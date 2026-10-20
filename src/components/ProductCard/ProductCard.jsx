@@ -28,7 +28,7 @@ export default function ProductCard({ product }) {
       />
 
       <h2 className={styles.title} id={`product-title-${product.id}`}>
-        {product.name}
+        {product.title}
       </h2>
 
       <p className={styles.description}>{product.description}</p>
