@@ -1,13 +1,15 @@
 {
-  "name": "cv-application",
+  "name": "shopping-cart",
   "private": true,
   "version": "0.0.0",
+  "description": "Shopping cart application built with React and Vite",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "echo \"No tests configured yet\" && exit 0"
   },
   "dependencies": {
     "react": "^19.2.8",
