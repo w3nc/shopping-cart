@@ -1,0 +1,29 @@
+.wrapper {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  background-color: var(--color-yellow);
+  color: var(--color-text);
+  padding: var(--space-3) 0;
+  transform: rotate(var(--tilt, -3deg)) scale(1.05);
+  z-index: 10;
+  position: relative;
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding-right: var(--space-6);
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-2xl);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-tight);
+}

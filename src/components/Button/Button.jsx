@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 import styles from "./Button.module.css";
 
 export default function Button({
+  children,
   variant = "primary",
   size = "md",
   to,
   href,
-  type,
+  type = "button",
   className = "",
-  children,
   ...rest
 }) {
   const classes = [styles.button, styles[variant], styles[size], className]
@@ -32,7 +32,7 @@ export default function Button({
   }
 
   return (
-    <button type={type ?? "button"} className={classes} {...rest}>
+    <button type={type} className={classes} {...rest}>
       {children}
     </button>
   );

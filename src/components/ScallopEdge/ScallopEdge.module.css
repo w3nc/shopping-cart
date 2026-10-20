@@ -1,29 +1,42 @@
 .edge {
-  --scallop-r: clamp(0.875rem, 2.6vw, 1.75rem);
   position: absolute;
-  right: 0;
   left: 0;
-  height: var(--scallop-r);
-  background-repeat: repeat-x;
-  background-position: center;
-  background-size: calc(var(--scallop-r) * 2) 100%;
+  right: 0;
+  height: var(--scallop-h, 24px);
+  background-color: var(--scallop-color, var(--color-yellow));
   pointer-events: none;
-}
-
-.top {
-  bottom: calc(100% - 1px);
-  background-image: radial-gradient(
-    circle at 50% 100%,
-    var(--scallop-color) calc(var(--scallop-r) - 0.5px),
-    transparent var(--scallop-r)
-  );
+  z-index: 1;
+  --bump-w: calc(var(--scallop-h, 24px) * 2);
 }
 
 .bottom {
-  top: calc(100% - 1px);
-  background-image: radial-gradient(
-    circle at 50% 0%,
-    var(--scallop-color) calc(var(--scallop-r) - 0.5px),
-    transparent var(--scallop-r)
-  );
+  bottom: calc(var(--scallop-h, 24px) * -1);
+  -webkit-mask: radial-gradient(
+      circle at 50% 0,
+      #000 calc(var(--scallop-h, 24px) - 1px),
+      transparent var(--scallop-h, 24px)
+    )
+    0 0 / var(--bump-w) var(--scallop-h, 24px) repeat-x;
+  mask: radial-gradient(
+      circle at 50% 0,
+      #000 calc(var(--scallop-h, 24px) - 1px),
+      transparent var(--scallop-h, 24px)
+    )
+    0 0 / var(--bump-w) var(--scallop-h, 24px) repeat-x;
+}
+
+.top {
+  top: calc(var(--scallop-h, 24px) * -1);
+  -webkit-mask: radial-gradient(
+      circle at 50% 100%,
+      #000 calc(var(--scallop-h, 24px) - 1px),
+      transparent var(--scallop-h, 24px)
+    )
+    0 0 / var(--bump-w) var(--scallop-h, 24px) repeat-x;
+  mask: radial-gradient(
+      circle at 50% 100%,
+      #000 calc(var(--scallop-h, 24px) - 1px),
+      transparent var(--scallop-h, 24px)
+    )
+    0 0 / var(--bump-w) var(--scallop-h, 24px) repeat-x;
 }

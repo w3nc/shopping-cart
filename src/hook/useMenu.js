@@ -1,10 +1,15 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { fetchMenu } from "../api/menu";
 
 export default function useMenu() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [tick, setTick] = useState(0);
+
+  const refetch = useCallback(() => {
+    setTick((current) => current + 1);
+  }, []);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -30,7 +35,7 @@ export default function useMenu() {
       active = false;
       controller.abort();
     };
-  }, []);
+  }, [tick]);
 
-  return { items, loading, error };
+  return { items, loading, error, refetch };
 }

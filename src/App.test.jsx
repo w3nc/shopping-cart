@@ -5,12 +5,16 @@ import App from "./App";
 
 const menuItems = [
   {
-    id: "crispy-chicken-sandwich",
-    name: "Crispy Chicken Sandwich",
-    description: "Buttermilk chicken fillet in a soft bun.",
-    price: 189,
+    id: 3,
+    title: "Spicy Pollo Sandwich",
+    description:
+      "Buttermilk fillet tossed in red spice, pickles, and house sauce.",
+    price: 8.49,
     image: "/images/menu/placeholder.svg",
+    altImage: "/images/menu/placeholder.svg",
     category: "chicken",
+    tags: ["Spicy", "Sandwich"],
+    featured: true,
   },
 ];
 
@@ -47,10 +51,11 @@ describe("App routes", () => {
       "href",
       "/#whyus",
     );
-    expect(screen.getByRole("link", { name: "Visit us" })).toHaveAttribute(
-      "href",
-      "/#visitus",
-    );
+    const visitUsLinks = screen.getAllByRole("link", { name: "Visit us" });
+    expect(visitUsLinks.length).toBeGreaterThan(0);
+    visitUsLinks.forEach((link) => {
+      expect(link).toHaveAttribute("href", "/#visitus");
+    });
 
     unmount();
     renderAt("/cart");
@@ -71,7 +76,7 @@ describe("App routes", () => {
     renderAt("/shop");
 
     expect(
-      await screen.findByRole("heading", { name: "Crispy Chicken Sandwich" }),
+      await screen.findByRole("heading", { name: "Spicy Pollo Sandwich" }),
     ).toBeInTheDocument();
   });
 

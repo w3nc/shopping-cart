@@ -1,44 +1,447 @@
+.page {
+  overflow-x: hidden; /* Prevent tilted marquee from causing horizontal scroll */
+}
+
+/* Hero */
 .hero {
-  padding: 3rem 1rem;
-  border-radius: var(--radius-lg);
-  background-color: var(--brand-yellow);
+  position: relative;
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-9);
+  background-color: var(--color-bg);
+}
+
+.heroInner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-7);
+}
+
+@media (min-width: 900px) {
+  .heroInner {
+    grid-template-columns: 1.2fr 1fr; /* Give the image a bit more space */
+    align-items: center;
+  }
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
+}
+
+.heroTitle {
+  font-size: var(--text-5xl);
+  line-height: 0.95;
+  margin: 0;
+  max-width: 12ch;
+}
+
+.heroSubtext {
+  font-size: var(--text-lg);
+  color: var(--color-text-soft);
+  max-width: 40ch;
+  margin: 0;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+/* Removed overflow: hidden so the scallop isn't clipped */
+.heroImageWrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background-color: var(--color-butter);
+  border-radius: var(--radius-xl);
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+}
+
+/* Value Strip */
+.valueStrip {
+  padding: var(--space-8) 0;
+  background-color: var(--color-surface);
+}
+
+.valueGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
   text-align: center;
 }
 
-.title {
-  font-size: clamp(2rem, 6vw, 3.5rem);
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+@media (min-width: 768px) {
+  .valueGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-.tagline {
-  max-width: 34rem;
-  margin: 0 auto 1.5rem;
+.valueCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
 }
 
-.cta {
-  display: inline-block;
-  padding: 0.85rem 1.75rem;
-  border-radius: 999px;
-  background-color: var(--brand-red);
-  color: #ffffff;
+.valueIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background-color: var(--color-butter);
+  border-radius: var(--radius-pill);
+  color: var(--color-accent);
+}
+
+.valueTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  margin: 0;
+}
+
+.valueText {
+  font-size: var(--text-sm);
+  color: var(--color-text-soft);
+  margin: 0;
+}
+
+.socialProof {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-7);
+}
+
+.avatars {
+  display: flex;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-text-soft);
+  border: 2px solid var(--color-surface);
+  margin-left: -8px;
+}
+
+.avatar:first-child {
+  margin-left: 0;
+}
+
+.proofText {
+  font-size: var(--text-sm);
   font-weight: 700;
-  text-decoration: none;
 }
 
-.note {
-  margin: 1.5rem 0 0;
-  font-size: 0.85rem;
+/* Ticker */
+.marqueeDot {
+  color: var(--color-accent);
 }
 
+/* Common Section Layout */
 .section {
-  margin-top: 3rem;
+  padding: var(--space-9) 0;
 }
 
-.list {
-  padding-left: 1.25rem;
+.centerHeading {
+  text-align: center;
+  margin-bottom: var(--space-7);
+  max-width: 20ch;
+  margin-inline: auto;
 }
 
-.address {
+.textLink {
+  font-weight: 700;
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Favorites */
+.favoritesHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .favoritesHeader {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.favoritesList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.favoriteCard {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .favoriteCard {
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
+
+.favoriteImage {
+  flex: 0 0 40%;
+  background-color: var(--color-butter);
+}
+
+.favoriteImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 240px;
+}
+
+/* Removed justify-content: center so text sits naturally at the top */
+.favoriteContent {
+  flex: 1;
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+}
+
+.favoriteTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  margin: 0 0 var(--space-2);
+}
+
+.favoriteDesc {
+  color: var(--color-text-soft);
+  margin-bottom: var(--space-4);
+}
+
+.favoriteTags {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+/* Removed margin-top: auto so it doesn't get pushed to the bottom */
+.favoritePrice {
+  font-weight: 700;
+  font-size: var(--text-lg);
+}
+
+/* Bento Grid (Why Us) */
+.bentoGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .bentoGrid {
+    grid-template-columns: 1.5fr 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+}
+
+.bentoMedia {
+  background-color: var(--color-butter);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .bentoMedia {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+}
+
+.bentoMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bentoStats {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-6);
+  background-color: var(--color-red);
+  color: var(--color-cream);
+  border-radius: var(--radius-xl);
+}
+
+@media (min-width: 768px) {
+  .bentoStats {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+.statNumber {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.statText {
+  font-size: var(--text-sm);
+  margin-top: var(--space-2);
+  opacity: 0.9;
+}
+
+.bentoQuality {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-6);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-xl);
+}
+
+@media (min-width: 768px) {
+  .bentoQuality {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
+
+.bentoTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  margin: 0 0 var(--space-2);
+}
+
+.bentoText {
+  font-size: var(--text-sm);
+  color: var(--color-text-soft);
+  margin-bottom: var(--space-4);
+}
+
+.bentoTallPhoto {
+  background-color: var(--color-butter);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .bentoTallPhoto {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+  }
+}
+
+.bentoTallPhoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Testimonials */
+.testimonialWrap {
+  display: grid;
+  grid-template-columns: 1fr;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  margin-top: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .testimonialWrap {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.testimonialImage {
+  background-color: var(--color-butter);
+  min-height: 320px;
+}
+
+.testimonialImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.testimonialContent {
+  padding: var(--space-7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quote {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-snug);
+  margin: 0 0 var(--space-6);
+}
+
+.author {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-bottom: var(--space-6);
+}
+
+.author span {
+  color: var(--color-text-soft);
+  font-size: var(--text-sm);
+}
+
+.carouselControls {
+  display: flex;
+  gap: var(--space-2);
+}
+
+/* Visit Us */
+.visitSection {
+  position: relative;
+  background-color: var(--color-yellow);
+  padding: var(--space-9) 0 calc(var(--space-9) + 32px);
+  margin-top: var(--space-8);
+}
+
+.visitInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-5);
+}
+
+.visitTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  line-height: var(--leading-tight);
+  margin: 0;
+  max-width: 16ch;
+}
+
+.visitAddress {
   font-style: normal;
+  font-size: var(--text-lg);
+  line-height: var(--leading-normal);
 }

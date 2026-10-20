@@ -30,7 +30,7 @@ export default function Navbar() {
           aria-label="Los Pollos Hermanos, home"
           onClick={closeMenu}
         >
-          <Wordmark />
+          <Wordmark size="sm" />
         </Link>
 
         <ul

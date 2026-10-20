@@ -1,20 +1,30 @@
 .wordmark {
-  display: inline-flex;
-  flex-direction: column;
-  color: var(--color-ink);
+  display: inline-block;
   font-family: var(--font-display);
-  font-size: 1.1rem;
-  line-height: 0.92;
-  letter-spacing: 0.01em;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
   text-transform: uppercase;
+  color: currentColor;
+  white-space: nowrap;
 }
 
-.line {
+.sm {
+  font-size: var(--text-lg);
+}
+
+.md {
+  font-size: var(--text-xl);
+}
+
+.lg {
+  font-size: var(--text-4xl);
+}
+
+.fill {
   display: block;
-}
-
-@media (min-width: 45em) {
-  .wordmark {
-    font-size: 1.3rem;
-  }
+  font-size: clamp(3.5rem, 15vw, 13rem);
+  letter-spacing: -0.03em;
+  line-height: 0.85;
+  white-space: normal;
 }

@@ -1,23 +1,14 @@
 import styles from "./Container.module.css";
 
 export default function Container({
-  as: Component = "div",
-  size = "default",
-  className = "",
   children,
-  ...rest
+  as: Tag = "div",
+  width = "default",
+  className = "",
 }) {
-  const classes = [
-    styles.container,
-    size === "narrow" && styles.narrow,
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
-
   return (
-    <Component className={classes} {...rest}>
+    <Tag className={`${styles.container} ${styles[width]} ${className}`}>
       {children}
-    </Component>
+    </Tag>
   );
 }

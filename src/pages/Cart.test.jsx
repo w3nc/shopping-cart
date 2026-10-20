@@ -8,16 +8,16 @@ import { formatPrice } from "../utils/currency";
 
 const seededItems = [
   {
-    id: "classic-bucket",
-    name: "The Classic Bucket",
-    price: 899,
+    id: 1,
+    title: "Pollo Classic Combo",
+    price: 9.99,
     image: "/images/menu/placeholder.svg",
     qty: 2,
   },
   {
-    id: "cheese-fries",
-    name: "Loaded Cheese Fries",
-    price: 149,
+    id: 5,
+    title: "Curly Fries Basket",
+    price: 4.49,
     image: "/images/menu/placeholder.svg",
     qty: 1,
   },
@@ -45,14 +45,15 @@ describe("Cart page", () => {
     renderCart();
 
     expect(
-      screen.getByRole("heading", { name: "The Classic Bucket" }),
+      screen.getByRole("heading", { name: "Pollo Classic Combo" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { name: "Loaded Cheese Fries" }),
+      screen.getByRole("heading", { name: "Curly Fries Basket" }),
     ).toBeInTheDocument();
-    expect(screen.getByText("3 items")).toBeInTheDocument();
+    expect(screen.getByText("Items")).toBeInTheDocument();
+    expect(screen.getByText("3")).toBeInTheDocument();
     expect(screen.getByTestId("cart-subtotal")).toHaveTextContent(
-      formatPrice(1947),
+      formatPrice(24.47),
     );
   });
 
@@ -60,14 +61,14 @@ describe("Cart page", () => {
     const user = userEvent.setup();
     renderCart();
 
-    const row = getRow("The Classic Bucket");
+    const row = getRow("Pollo Classic Combo");
     const input = within(row).getByLabelText("Quantity");
 
     await user.clear(input);
     await user.type(input, "3");
 
     expect(screen.getByTestId("cart-subtotal")).toHaveTextContent(
-      formatPrice(2846),
+      formatPrice(34.46),
     );
   });
 
@@ -75,16 +76,16 @@ describe("Cart page", () => {
     const user = userEvent.setup();
     renderCart();
 
-    const row = getRow("Loaded Cheese Fries");
+    const row = getRow("Curly Fries Basket");
     await user.click(
       within(row).getByRole("button", { name: "Decrease quantity" }),
     );
 
     expect(
-      screen.queryByRole("heading", { name: "Loaded Cheese Fries" }),
+      screen.queryByRole("heading", { name: "Curly Fries Basket" }),
     ).not.toBeInTheDocument();
     expect(screen.getByTestId("cart-subtotal")).toHaveTextContent(
-      formatPrice(1798),
+      formatPrice(19.98),
     );
   });
 
@@ -94,15 +95,15 @@ describe("Cart page", () => {
 
     await user.click(
       screen.getByRole("button", {
-        name: "Remove The Classic Bucket from cart",
+        name: "Remove Pollo Classic Combo from cart",
       }),
     );
 
     expect(
-      screen.queryByRole("heading", { name: "The Classic Bucket" }),
+      screen.queryByRole("heading", { name: "Pollo Classic Combo" }),
     ).not.toBeInTheDocument();
     expect(screen.getByTestId("cart-subtotal")).toHaveTextContent(
-      formatPrice(149),
+      formatPrice(4.49),
     );
   });
 

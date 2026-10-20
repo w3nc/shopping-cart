@@ -1,47 +1,71 @@
 import ProductCard from "../components/ProductCard/ProductCard";
+import Container from "../components/Container/Container";
+import Button from "../components/Button/Button";
 import useMenu from "../hook/useMenu";
 import styles from "./Shop.module.css";
 
+function SkeletonCard() {
+  return (
+    <div className={styles.skeletonCard}>
+      <div className={styles.skeletonImage} />
+      <div className={styles.skeletonText} style={{ width: "60%" }} />
+      <div className={styles.skeletonText} style={{ width: "100%" }} />
+      <div className={styles.skeletonText} style={{ width: "80%" }} />
+      <div className={styles.skeletonFooter} />
+    </div>
+  );
+}
+
 export default function Shop() {
-  const { items, loading, error } = useMenu();
+  const { items, loading, error, refetch } = useMenu();
 
   return (
-    <section aria-labelledby="shop-heading">
-      <header className={styles.header}>
-        <h1 id="shop-heading" className={styles.heading}>
-          Our menu
-        </h1>
-        <p className={styles.lead}>
-          Fried chicken, sides and drinks, cooked to order.
-        </p>
-      </header>
+    <section className={styles.page}>
+      <Container>
+        <header className={styles.header}>
+          <h1 className={styles.heading}>Our menu</h1>
+          <p className={styles.lead}>
+            Fried chicken, sides and drinks, cooked to order.
+          </p>
+        </header>
 
-      {loading && (
-        <p className={styles.status} role="status">
-          Loading the menu...
-        </p>
-      )}
+        {loading && (
+          <div
+            className={styles.grid}
+            role="status"
+            aria-label="Loading the menu"
+          >
+            {Array.from({ length: 8 }).map((_, i) => (
+              <SkeletonCard key={i} />
+            ))}
+            <span className={styles.srOnly}>Loading the menu...</span>
+          </div>
+        )}
 
-      {!loading && error && (
-        <div className={styles.error} role="alert">
-          <p>{error.message}</p>
-          <p>Check your connection and refresh the page to try again.</p>
-        </div>
-      )}
+        {!loading && error && (
+          <div className={styles.error} role="alert">
+            <h2 className={styles.errorTitle}>We hit a snag</h2>
+            <p>{error.message}</p>
+            <Button onClick={refetch} variant="primary">
+              Try again
+            </Button>
+          </div>
+        )}
 
-      {!loading && !error && items.length === 0 && (
-        <p className={styles.status}>The menu is empty right now.</p>
-      )}
+        {!loading && !error && items.length === 0 && (
+          <p className={styles.status}>The menu is empty right now.</p>
+        )}
 
-      {!loading && !error && items.length > 0 && (
-        <ul className={styles.grid}>
-          {items.map((product) => (
-            <li key={product.id} className={styles.gridItem}>
-              <ProductCard product={product} />
-            </li>
-          ))}
-        </ul>
-      )}
+        {!loading && !error && items.length > 0 && (
+          <ul className={styles.grid}>
+            {items.map((product) => (
+              <li key={product.id} className={styles.gridItem}>
+                <ProductCard product={product} />
+              </li>
+            ))}
+          </ul>
+        )}
+      </Container>
     </section>
   );
 }

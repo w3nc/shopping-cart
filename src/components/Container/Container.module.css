@@ -1,10 +1,22 @@
 .container {
   width: 100%;
-  max-width: var(--container-max);
   margin-inline: auto;
-  padding-inline: var(--gutter);
+  padding-inline: var(--container-pad);
+}
+
+.default {
+  max-width: var(--container-max);
+}
+
+.wide {
+  max-width: 1400px;
 }
 
 .narrow {
-  max-width: var(--container-narrow);
+  max-width: 720px;
+}
+
+.full {
+  max-width: none;
+  padding-inline: 0;
 }

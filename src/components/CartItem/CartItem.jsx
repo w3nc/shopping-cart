@@ -8,28 +8,32 @@ export default function CartItem({ item }) {
 
   return (
     <li className={styles.row}>
-      <img
-        className={styles.image}
-        src={item.image}
-        alt=""
-        width="96"
-        height="96"
-        loading="lazy"
-      />
+      <div className={styles.imageWrap}>
+        <img
+          className={styles.image}
+          src={item.image}
+          alt=""
+          width="96"
+          height="96"
+          loading="lazy"
+        />
+      </div>
 
       <div className={styles.info}>
         <h2 className={styles.name}>{item.title}</h2>
         <p className={styles.price}>{formatPrice(item.price)} each</p>
       </div>
 
-      <QuantityInput
-        id={`cart-quantity-${item.id}`}
-        value={item.qty}
-        onChange={(nextQty) => setQty(item.id, nextQty)}
-        onIncrease={() => increment(item.id)}
-        onDecrease={() => decrement(item.id)}
-        label="Quantity"
-      />
+      <div className={styles.controls}>
+        <QuantityInput
+          id={`cart-quantity-${item.id}`}
+          value={item.qty}
+          onChange={(nextQty) => setQty(item.id, nextQty)}
+          onIncrease={() => increment(item.id)}
+          onDecrease={() => decrement(item.id)}
+          label="Quantity"
+        />
+      </div>
 
       <p className={styles.lineTotal}>{formatPrice(item.price * item.qty)}</p>
 

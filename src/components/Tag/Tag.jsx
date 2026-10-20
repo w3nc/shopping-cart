@@ -1,9 +1,5 @@
 import styles from "./Tag.module.css";
 
-export default function Tag({ tone = "cream", className = "", children }) {
-  const classes = [styles.tag, styles[tone], className]
-    .filter(Boolean)
-    .join(" ");
-
-  return <span className={classes}>{children}</span>;
+export default function Tag({ children, tone = "default" }) {
+  return <span className={`${styles.tag} ${styles[tone]}`}>{children}</span>;
 }
