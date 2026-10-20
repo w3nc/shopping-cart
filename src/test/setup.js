@@ -1,11 +1,8 @@
-// src/test/setup.js
 import "@testing-library/jest-dom/vitest";
 import { cleanup } from "@testing-library/react";
 import { afterEach, vi } from "vitest";
 
 // --- IntersectionObserver ---
-// jsdom does not implement this. The stub below is "triggerable",
-// which means you can manually fire the callback in Phase 5 tests.
 class IntersectionObserverStub {
   static instances = [];
 
@@ -34,7 +31,6 @@ class IntersectionObserverStub {
     return [];
   }
 
-  // Test helper, not part of the real API
   trigger(isIntersecting = true) {
     this.callback(
       [...this.elements].map((target) => ({
@@ -54,8 +50,6 @@ class IntersectionObserverStub {
 vi.stubGlobal("IntersectionObserver", IntersectionObserverStub);
 
 // --- matchMedia ---
-// jsdom does not implement this. Returning a consistent shape
-// prevents "matchMedia is not a function" errors in components.
 vi.stubGlobal("matchMedia", (query) => ({
   matches: false,
   media: query,
@@ -68,14 +62,40 @@ vi.stubGlobal("matchMedia", (query) => ({
 }));
 
 // --- Scroll methods ---
-// jsdom does not implement these. Using vi.fn() lets you assert
-// calls in tests that care about scrolling behavior.
 Element.prototype.scrollIntoView = vi.fn();
 window.scrollTo = vi.fn();
 
-// --- Cleanup ---
-// Explicit cleanup is safer than relying on RTL auto-cleanup,
-// especially when tests opt out of globals.
+// --- GSAP Mocks ---
+// Prevents GSAP from crashing in JSDOM and prevents it from hiding elements
+// (opacity: 0) during tests.
+vi.mock("gsap", () => ({
+  default: {
+    registerPlugin: vi.fn(),
+    fromTo: vi.fn(),
+    to: vi.fn(),
+    context: vi.fn(),
+  },
+  gsap: {
+    registerPlugin: vi.fn(),
+    fromTo: vi.fn(),
+    to: vi.fn(),
+    context: vi.fn(),
+  },
+}));
+
+vi.mock("gsap/ScrollTrigger", () => ({
+  ScrollTrigger: {
+    create: vi.fn(() => ({ kill: vi.fn() })),
+    registerPlugin: vi.fn(),
+  },
+}));
+
+vi.mock("@gsap/react", () => ({
+  useGSAP: vi.fn((callback) => {
+    // Do nothing in tests, let elements render normally at full opacity
+  }),
+}));
+
 afterEach(() => {
   cleanup();
 });

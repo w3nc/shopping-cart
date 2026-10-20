@@ -1,4 +1,7 @@
+import { useRef } from "react";
 import { Link } from "react-router-dom";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import useMenu from "../hook/useMenu";
 import { formatPrice } from "../utils/currency";
 import Container from "../components/Container/Container";
@@ -8,6 +11,11 @@ import Tag from "../components/Tag/Tag";
 import ScallopEdge from "../components/ScallopEdge/ScallopEdge";
 import Marquee from "../components/Marquee/Marquee";
 import Accordion from "../components/Accordion/Accordion";
+import Reveal from "../components/Reveal/Reveal";
+import CountUp from "../components/CountUp/CountUp";
+import TestimonialCarousel from "../components/TestimonialCarousel/TestimonialCarousel";
+import CursorTrail from "../components/CursorTrail/CursorTrail";
+import TurntableMedia from "../components/TurntableMedia/TurntableMedia";
 import styles from "./Home.module.css";
 
 // Simple functional icons (stroke based)
@@ -55,27 +63,6 @@ const IconHeart = () => (
   </svg>
 );
 
-const testimonials = [
-  {
-    quote:
-      "The chicken is always crispy, never greasy. It feels like a Sunday dinner at my grandmother's house.",
-    name: "Marcus T.",
-    role: "Local regular",
-  },
-  {
-    quote:
-      "I stop by for the spicy sandwich at least twice a week. The staff knows my order before I reach the counter.",
-    name: "Elena R.",
-    role: "Downtown worker",
-  },
-  {
-    quote:
-      "We ordered the family bucket for a small party. Everything arrived hot and the sides were fantastic.",
-    name: "Devon K.",
-    role: "First-time visitor",
-  },
-];
-
 const faqs = [
   {
     question: "Do you have vegetarian options?",
@@ -103,9 +90,39 @@ const faqs = [
   },
 ];
 
+const cardColors = ["var(--color-surface)", "var(--color-butter)", "#FFE9A8"];
+
 export default function Home() {
   const { items } = useMenu();
   const featured = items.filter((item) => item.featured).slice(0, 3);
+  const favoritesListRef = useRef(null);
+
+  useGSAP(
+    () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (!favoritesListRef.current) return;
+
+      const cards = gsap.utils.toArray(favoritesListRef.current.children);
+
+      cards.forEach((card, index) => {
+        if (index === cards.length - 1) return;
+        const nextCard = cards[index + 1];
+
+        gsap.to(card, {
+          scale: 0.95 - index * 0.02,
+          rotation: index % 2 === 0 ? -2 : 2,
+          opacity: 0.8,
+          scrollTrigger: {
+            trigger: nextCard,
+            start: "top 80%",
+            end: "top 20%",
+            scrub: true,
+          },
+        });
+      });
+    },
+    { scope: favoritesListRef },
+  );
 
   return (
     <div className={styles.page}>
@@ -127,10 +144,9 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Scallop is now inside the image wrap, but the wrap allows overflow */}
           <div className={styles.heroImageWrap}>
             <img
-              src="/images/menu/placeholder.svg"
+              src="/images/menu/hero-bg.jpg"
               alt="Los Pollos Hermanos restaurant exterior"
               className={styles.heroImage}
             />
@@ -142,7 +158,7 @@ export default function Home() {
       {/* 2. VALUE STRIP */}
       <section className={styles.valueStrip}>
         <Container>
-          <div className={styles.valueGrid}>
+          <Reveal className={styles.valueGrid} stagger={0.1}>
             <div className={styles.valueCard}>
               <div className={styles.valueIcon}>
                 <IconLeaf />
@@ -170,19 +186,21 @@ export default function Home() {
                 Recipes the whole family loves.
               </p>
             </div>
-          </div>
-          <div className={styles.socialProof}>
-            <div className={styles.avatars}>
-              <div className={styles.avatar} />
-              <div className={styles.avatar} />
-              <div className={styles.avatar} />
+          </Reveal>
+          <Reveal y={16}>
+            <div className={styles.socialProof}>
+              <div className={styles.avatars}>
+                <div className={styles.avatar} />
+                <div className={styles.avatar} />
+                <div className={styles.avatar} />
+              </div>
+              <span className={styles.proofText}>3k+ happy regulars</span>
             </div>
-            <span className={styles.proofText}>3k+ happy regulars</span>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
-      {/* 3. TICKER TAPE */}
+      {/* 3. TICKER TAPE (First Instance) */}
       <Marquee tilt={-3}>
         <span>FRESH POLLO TIME</span>
         <span className={styles.marqueeDot}>•</span>
@@ -190,18 +208,26 @@ export default function Home() {
         <span className={styles.marqueeDot}>•</span>
       </Marquee>
 
-      {/* 4. FAVORITES */}
+      {/* 4. FAVORITES (Sticky Stack) */}
       <section id="bestsellers" className={styles.section}>
         <Container>
-          <div className={styles.favoritesHeader}>
+          <Reveal className={styles.favoritesHeader} y={32}>
             <SectionHeading>Our favorites</SectionHeading>
             <Link to="/shop" className={styles.textLink}>
               See the full menu
             </Link>
-          </div>
-          <div className={styles.favoritesList}>
-            {featured.map((product) => (
-              <article key={product.id} className={styles.favoriteCard}>
+          </Reveal>
+
+          <div className={styles.favoritesList} ref={favoritesListRef}>
+            {featured.map((product, index) => (
+              <article
+                key={product.id}
+                className={styles.favoriteCard}
+                style={{
+                  top: `${100 + index * 24}px`,
+                  backgroundColor: cardColors[index % cardColors.length],
+                }}
+              >
                 <div className={styles.favoriteImage}>
                   <img src={product.image} alt="" />
                 </div>
@@ -226,18 +252,19 @@ export default function Home() {
       {/* 5. WHY US (BENTO GRID) */}
       <section id="whyus" className={styles.section}>
         <Container>
-          <SectionHeading className={styles.centerHeading}>
-            Why our chicken is the best
-          </SectionHeading>
-          <div className={styles.bentoGrid}>
-            <div className={styles.bentoMedia}>
-              <img
-                src="/images/menu/placeholder.svg"
-                alt="Chicken preparation"
-              />
-            </div>
+          <Reveal className={styles.centerHeading} y={32}>
+            <SectionHeading>Why our chicken is the best</SectionHeading>
+          </Reveal>
+          <Reveal className={styles.bentoGrid} stagger={0.1}>
+            {/* Turntable Media replaces the static image */}
+            <TurntableMedia
+              className={styles.bentoMedia}
+              imageSrc="/images/menu/fresh-ingredients.jpg"
+            />
             <div className={styles.bentoStats}>
-              <span className={styles.statNumber}>900+</span>
+              <span className={styles.statNumber}>
+                <CountUp end={900} suffix="+" />
+              </span>
               <span className={styles.statText}>
                 Plates of crispy chicken served daily
               </span>
@@ -254,79 +281,72 @@ export default function Home() {
               </div>
             </div>
             <div className={styles.bentoTallPhoto}>
-              <img src="/images/menu/placeholder.svg" alt="Fresh ingredients" />
+              <img src="/images/menu/fresh-ingredients.jpg" alt="Fresh ingredients" />
             </div>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
       {/* 6. TESTIMONIALS */}
       <section className={styles.section}>
         <Container>
-          <SectionHeading>Words from our regulars</SectionHeading>
-          <div className={styles.testimonialWrap}>
-            <div className={styles.testimonialImage}>
-              <img src="/images/menu/placeholder.svg" alt="Happy customer" />
-            </div>
-            <div className={styles.testimonialContent}>
-              <p className={styles.quote}>"{testimonials[0].quote}"</p>
-              <div className={styles.author}>
-                <strong>{testimonials[0].name}</strong>
-                <span>{testimonials[0].role}</span>
-              </div>
-              <div className={styles.carouselControls}>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  aria-label="Previous testimonial"
-                >
-                  ←
-                </Button>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  aria-label="Next testimonial"
-                >
-                  →
-                </Button>
-              </div>
-            </div>
-          </div>
+          <Reveal className={styles.centerHeading} y={32}>
+            <SectionHeading>Words from our regulars</SectionHeading>
+          </Reveal>
+          <Reveal y={24}>
+            <TestimonialCarousel />
+          </Reveal>
         </Container>
       </section>
 
+      {/* 3b. TICKER TAPE (Second Instance) */}
+      <Marquee tilt={2}>
+        <span>FRESH POLLO TIME</span>
+        <span className={styles.marqueeDot}>•</span>
+        <span>Visit us and try our famous chicken</span>
+        <span className={styles.marqueeDot}>•</span>
+      </Marquee>
+
       {/* 7. VISIT US */}
       <section id="visitus" className={styles.visitSection}>
+        <CursorTrail />
         <Container className={styles.visitInner}>
-          <h2 className={styles.visitTitle}>
-            Visit us and try our famous chicken
-          </h2>
-          <address className={styles.visitAddress}>
-            1212 South Valley Road
-            <br />
-            Albuquerque, NM
-            <br />
-            Open daily, 10:00 to 22:00
-          </address>
-          <Button
-            href="https://maps.google.com/?q=Albuquerque+NM"
-            variant="primary"
-            size="lg"
-          >
-            Get directions
-          </Button>
+          <Reveal y={32}>
+            <h2 className={styles.visitTitle}>
+              Visit us and try our famous chicken
+            </h2>
+          </Reveal>
+          <Reveal y={24}>
+            <address className={styles.visitAddress}>
+              1212 South Valley Road
+              <br />
+              Albuquerque, NM
+              <br />
+              Open daily, 10:00 to 22:00
+            </address>
+          </Reveal>
+          <Reveal y={16}>
+            <Button
+              href="https://maps.google.com/?q=Albuquerque+NM"
+              variant="primary"
+              size="lg"
+            >
+              Get directions
+            </Button>
+          </Reveal>
         </Container>
-        {/* Changed color to yellow so it's visible against the cream background */}
         <ScallopEdge position="bottom" color="var(--color-yellow)" size={32} />
       </section>
 
       {/* 8. FAQ */}
       <section id="faq" className={styles.section}>
         <Container width="narrow">
-          <SectionHeading className={styles.centerHeading}>
-            Frequently asked questions
-          </SectionHeading>
-          <Accordion items={faqs} />
+          <Reveal className={styles.centerHeading} y={32}>
+            <SectionHeading>Frequently asked questions</SectionHeading>
+          </Reveal>
+          <Reveal y={24}>
+            <Accordion items={faqs} />
+          </Reveal>
         </Container>
       </section>
     </div>

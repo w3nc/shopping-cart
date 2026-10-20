@@ -5,8 +5,8 @@
     "price": 9.99,
     "category": "combos",
     "description": "Half chicken, crispy skin, two sides, and a warm biscuit.",
-    "image": "/images/menu/placeholder.svg",
-    "altImage": "/images/menu/placeholder.svg",
+    "image": "/images/menu/classic-combo.jpg",
+    "altImage": "/images/menu/classic-combo.jpg",
     "tags": ["Signature", "Crispy"],
     "featured": true
   },
@@ -16,8 +16,8 @@
     "price": 24.99,
     "category": "combos",
     "description": "Twelve pieces of golden fried chicken with three large sides.",
-    "image": "/images/menu/placeholder.svg",
-    "altImage": "/images/menu/placeholder.svg",
+    "image": "/images/menu/family-bucket.jpg",
+    "altImage": "/images/menu/family-bucket.jpg",
     "tags": ["Family", "Shareable"],
     "featured": true
   },
@@ -27,8 +27,8 @@
     "price": 8.49,
     "category": "chicken",
     "description": "Buttermilk fillet tossed in red spice, pickles, and house sauce.",
-    "image": "/images/menu/placeholder.svg",
-    "altImage": "/images/menu/placeholder.svg",
+    "image": "/images/menu/spicy-sandwich.jpg",
+    "altImage": "/images/menu/spicy-sandwich.jpg",
     "tags": ["Spicy", "Sandwich"],
     "featured": true
   },
@@ -38,8 +38,8 @@
     "price": 7.29,
     "category": "chicken",
     "description": "Crispy chicken strips, slaw, and ranch in a warm flour tortilla.",
-    "image": "/images/menu/placeholder.svg",
-    "altImage": "/images/menu/placeholder.svg",
+    "image": "/images/menu/pollo-wrap.jpg",
+    "altImage": "/images/menu/pollo-wrap.jpg",
     "tags": ["Handheld", "Fresh"],
     "featured": false
   },
@@ -49,8 +49,8 @@
     "price": 4.49,
     "category": "sides",
     "description": "A generous basket of seasoned curly fries.",
-    "image": "/images/menu/placeholder.svg",
-    "altImage": "/images/menu/placeholder.svg",
+    "image": "/images/menu/curly-fries.jpg",
+    "altImage": "/images/menu/curly-fries.jpg",
     "tags": ["Crispy", "Shareable"],
     "featured": false
   },
@@ -60,8 +60,8 @@
     "price": 6.99,
     "category": "sides",
     "description": "A take-home bottle of our signature dipping sauce.",
-    "image": "/images/menu/placeholder.svg",
-    "altImage": "/images/menu/placeholder.svg",
+    "image": "/images/menu/sauce-bottle.jpg",
+    "altImage": "/images/menu/sauce-bottle.jpg",
     "tags": ["Take home", "Signature"],
     "featured": false
   },
@@ -71,8 +71,8 @@
     "price": 3.29,
     "category": "drinks",
     "description": "House-squeezed lemonade served over ice.",
-    "image": "/images/menu/placeholder.svg",
-    "altImage": "/images/menu/placeholder.svg",
+    "image": "/images/menu/lemonade.jpg",
+    "altImage": "/images/menu/lemonade.jpg",
     "tags": ["Fresh", "Cold"],
     "featured": false
   },
@@ -82,8 +82,8 @@
     "price": 2.99,
     "category": "drinks",
     "description": "Slow-brewed sweet tea, the house classic.",
-    "image": "/images/menu/placeholder.svg",
-    "altImage": "/images/menu/placeholder.svg",
+    "image": "/images/menu/sweet-tea.jpg",
+    "altImage": "/images/menu/sweet-tea.jpg",
     "tags": ["Classic", "Cold"],
     "featured": false
   },
@@ -93,8 +93,8 @@
     "price": 5.49,
     "category": "desserts",
     "description": "Warm cinnamon sugar churro bites with a chocolate dip.",
-    "image": "/images/menu/placeholder.svg",
-    "altImage": "/images/menu/placeholder.svg",
+    "image": "/images/menu/churro-bites.jpg",
+    "altImage": "/images/menu/churro-bites.jpg",
     "tags": ["Sweet", "Shareable"],
     "featured": false
   }

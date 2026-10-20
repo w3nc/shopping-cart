@@ -1,14 +1,34 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useCart } from "../../context/CartContext";
 import Wordmark from "../Wordmark/Wordmark";
 import styles from "./Navbar.module.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Navbar() {
   const { totalItems } = useCart();
   const [open, setOpen] = useState(false);
   const toggleRef = useRef(null);
+  const navRef = useRef(null);
   const itemLabel = totalItems === 1 ? "item" : "items";
+
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav) return;
+
+    // Use ScrollTrigger to toggle a class when scrolling past 20px.
+    // This completely avoids a window scroll listener.
+    const st = ScrollTrigger.create({
+      start: 20,
+      end: 99999,
+      toggleClass: { targets: nav, className: styles.isScrolled },
+    });
+
+    return () => st.kill();
+  }, []);
 
   const closeMenu = () => setOpen(false);
 
@@ -23,7 +43,7 @@ export default function Navbar() {
 
   return (
     <header className={styles.header} onKeyDown={handleKeyDown}>
-      <nav className={styles.nav} aria-label="Main navigation">
+      <nav className={styles.nav} ref={navRef} aria-label="Main navigation">
         <Link
           to="/"
           className={styles.brand}

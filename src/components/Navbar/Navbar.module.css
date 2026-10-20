@@ -19,8 +19,21 @@
   height: var(--nav-height);
   max-height: var(--nav-max-height);
   padding: 0 var(--space-2) 0 var(--space-5);
-  background-color: var(--color-surface);
   border-radius: var(--radius-pill);
+  
+  /* Default: Transparent at the top */
+  background-color: transparent;
+  box-shadow: none;
+  transition: background-color var(--duration-base) var(--ease-out),
+              box-shadow var(--duration-base) var(--ease-out),
+              backdrop-filter var(--duration-base) var(--ease-out);
+}
+
+/* GSAP adds this class via ScrollTrigger */
+.nav.isScrolled {
+  background-color: rgba(255, 253, 246, 0.85); /* --color-surface with opacity */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: var(--shadow-nav);
 }
 
@@ -142,7 +155,9 @@
     align-items: stretch;
     gap: var(--space-1);
     padding: var(--space-3);
-    background-color: var(--color-surface);
+    background-color: rgba(255, 253, 246, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-nav);
     display: none;

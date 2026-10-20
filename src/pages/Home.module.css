@@ -1,5 +1,5 @@
 .page {
-  overflow-x: hidden; /* Prevent tilted marquee from causing horizontal scroll */
+  /* Removed overflow-x: hidden to let sticky work */
 }
 
 /* Hero */
@@ -18,7 +18,7 @@
 
 @media (min-width: 900px) {
   .heroInner {
-    grid-template-columns: 1.2fr 1fr; /* Give the image a bit more space */
+    grid-template-columns: 1.2fr 1fr;
     align-items: center;
   }
 }
@@ -51,7 +51,6 @@
   margin-top: var(--space-2);
 }
 
-/* Removed overflow: hidden so the scallop isn't clipped */
 .heroImageWrap {
   position: relative;
   aspect-ratio: 4 / 3;
@@ -169,7 +168,7 @@
   text-underline-offset: 4px;
 }
 
-/* Favorites */
+/* Favorites (Sticky Stack) */
 .favoritesHeader {
   display: flex;
   flex-direction: column;
@@ -189,14 +188,17 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
+  padding-bottom: 50vh;
 }
 
 .favoriteCard {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--color-surface);
+  position: sticky;
   border-radius: var(--radius-xl);
   overflow: hidden;
+  box-shadow: 0 -4px 20px rgba(27, 18, 8, 0.05);
+  will-change: transform;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (min-width: 768px) {
@@ -218,7 +220,6 @@
   min-height: 240px;
 }
 
-/* Removed justify-content: center so text sits naturally at the top */
 .favoriteContent {
   flex: 1;
   padding: var(--space-6);
@@ -243,7 +244,6 @@
   margin-bottom: var(--space-4);
 }
 
-/* Removed margin-top: auto so it doesn't get pushed to the bottom */
 .favoritePrice {
   font-weight: 700;
   font-size: var(--text-lg);
@@ -264,22 +264,9 @@
 }
 
 .bentoMedia {
-  background-color: var(--color-butter);
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-}
-
-@media (min-width: 768px) {
-  .bentoMedia {
-    grid-column: 1;
-    grid-row: 1 / span 2;
-  }
-}
-
-.bentoMedia img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  /* Removed background and border-radius, now handled by TurntableMedia */
+  grid-column: 1;
+  grid-row: 1 / span 2;
 }
 
 .bentoStats {
@@ -358,67 +345,10 @@
   object-fit: cover;
 }
 
-/* Testimonials */
-.testimonialWrap {
-  display: grid;
-  grid-template-columns: 1fr;
-  background-color: var(--color-surface);
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  margin-top: var(--space-6);
-}
-
-@media (min-width: 768px) {
-  .testimonialWrap {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.testimonialImage {
-  background-color: var(--color-butter);
-  min-height: 320px;
-}
-
-.testimonialImage img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.testimonialContent {
-  padding: var(--space-7);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.quote {
-  font-family: var(--font-display);
-  font-size: var(--text-2xl);
-  line-height: var(--leading-snug);
-  margin: 0 0 var(--space-6);
-}
-
-.author {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  margin-bottom: var(--space-6);
-}
-
-.author span {
-  color: var(--color-text-soft);
-  font-size: var(--text-sm);
-}
-
-.carouselControls {
-  display: flex;
-  gap: var(--space-2);
-}
-
 /* Visit Us */
 .visitSection {
   position: relative;
+  overflow: hidden;
   background-color: var(--color-yellow);
   padding: var(--space-9) 0 calc(var(--space-9) + 32px);
   margin-top: var(--space-8);
@@ -430,6 +360,8 @@
   align-items: center;
   text-align: center;
   gap: var(--space-5);
+  position: relative;
+  z-index: 20; /* Keep text above the cursor trail */
 }
 
 .visitTitle {

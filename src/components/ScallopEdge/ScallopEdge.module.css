@@ -7,6 +7,9 @@
   pointer-events: none;
   z-index: 1;
   --bump-w: calc(var(--scallop-h, 24px) * 2);
+  
+  /* Animate the mask position to create the drift */
+  animation: drift var(--duration-scallop) linear infinite;
 }
 
 .bottom {
@@ -39,4 +42,21 @@
       transparent var(--scallop-h, 24px)
     )
     0 0 / var(--bump-w) var(--scallop-h, 24px) repeat-x;
+}
+
+@keyframes drift {
+  from {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+  to {
+    -webkit-mask-position: var(--bump-w) 0;
+    mask-position: var(--bump-w) 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .edge {
+    animation: none;
+  }
 }

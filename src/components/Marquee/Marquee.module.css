@@ -13,6 +13,8 @@
 .track {
   display: flex;
   width: max-content;
+  will-change: transform;
+  animation: marquee var(--duration-marquee) linear infinite;
 }
 
 .content {
@@ -26,4 +28,20 @@
   font-size: var(--text-2xl);
   text-transform: uppercase;
   letter-spacing: var(--tracking-tight);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+    transform: none;
+  }
 }

@@ -10,8 +10,8 @@ const menuItems = [
     description:
       "Buttermilk fillet tossed in red spice, pickles, and house sauce.",
     price: 8.49,
-    image: "/images/menu/placeholder.svg",
-    altImage: "/images/menu/placeholder.svg",
+    image: "/images/menu/spicy-sandwich.jpg",
+    altImage: "/images/menu/spicy-sandwich.jpg",
     category: "chicken",
     tags: ["Spicy", "Sandwich"],
     featured: true,

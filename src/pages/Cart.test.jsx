@@ -11,14 +11,14 @@ const seededItems = [
     id: 1,
     title: "Pollo Classic Combo",
     price: 9.99,
-    image: "/images/menu/placeholder.svg",
+    image: "/images/menu/classic-combo.jpg",
     qty: 2,
   },
   {
     id: 5,
     title: "Curly Fries Basket",
     price: 4.49,
-    image: "/images/menu/placeholder.svg",
+    image: "/images/menu/curly-fries.jpg",
     qty: 1,
   },
 ];
