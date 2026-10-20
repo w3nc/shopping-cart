@@ -35,10 +35,13 @@ export default function Reveal({
           duration,
           stagger: stagger > 0 ? stagger : 0,
           ease: "power2.out",
+          invalidateOnRefresh: true,
           scrollTrigger: {
             trigger: target,
             start: "top 85%",
             toggleActions: "play none none none",
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
           },
         },
       );

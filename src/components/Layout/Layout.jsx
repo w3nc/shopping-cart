@@ -1,8 +1,16 @@
 import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
+import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import styles from "./Layout.module.css";
+
+gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
+
+// Chrome-specific: prevent ScrollTrigger from breaking on scroll position reporting
+ScrollTrigger.config({ ignoreMobileResize: true, ignoreMobileOrientation: true });
 
 export default function Layout() {
   const { pathname, hash, key } = useLocation();
@@ -13,7 +21,11 @@ export default function Layout() {
       const timer = window.setTimeout(() => {
         const target = document.getElementById(id);
         if (target) {
-          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          gsap.to(window, {
+            duration: 1,
+            scrollTo: { y: target, offsetY: 76 },
+            ease: "power2.inOut",
+          });
         }
       }, 0);
 

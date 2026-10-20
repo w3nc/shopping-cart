@@ -19,6 +19,7 @@
 
 /* CSS 3D Turntable */
 .turntableScene {
+  -webkit-perspective: 1000px;
   perspective: 1000px;
   width: 160px;
   height: 160px;
@@ -31,11 +32,14 @@
   width: 160px;
   height: 160px;
   position: relative;
+  -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
+  -webkit-animation: spin 16s linear infinite;
   animation: spin 16s linear infinite;
 }
 
 .turntableCube.paused {
+  -webkit-animation-play-state: paused;
   animation-play-state: paused;
 }
 
@@ -48,8 +52,13 @@
   border-radius: var(--radius-md);
   border: 2px solid var(--color-surface);
   box-shadow: 0 8px 24px rgba(27, 18, 8, 0.1);
-  /* Slight backface visibility adjustment for smoother rendering */
-  backface-visibility: hidden; 
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotateY(0deg) rotateX(10deg); transform: rotateY(0deg) rotateX(10deg); }
+  100% { -webkit-transform: rotateY(360deg) rotateX(10deg); transform: rotateY(360deg) rotateX(10deg); }
 }
 
 @keyframes spin {
@@ -59,7 +68,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .turntableCube {
+    -webkit-animation: none;
     animation: none;
+    -webkit-transform: rotateY(30deg) rotateX(10deg);
     transform: rotateY(30deg) rotateX(10deg);
   }
 }
