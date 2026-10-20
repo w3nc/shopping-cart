@@ -1,0 +1,50 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.controls {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid rgba(27, 18, 8, 0.2);
+  border-radius: 999px;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.button {
+  width: 2.25rem;
+  border: 0;
+  background-color: transparent;
+  color: inherit;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.input {
+  width: 3.25rem;
+  padding: 0.4rem 0;
+  border: 0;
+  background-color: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: center;
+}
+
+.button:focus-visible,
+.input:focus-visible {
+  outline: 2px solid var(--brand-red);
+  outline-offset: -2px;
+}

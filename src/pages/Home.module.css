@@ -1,0 +1,44 @@
+.hero {
+  padding: 3rem 1rem;
+  border-radius: var(--radius-lg);
+  background-color: var(--brand-yellow);
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.tagline {
+  max-width: 34rem;
+  margin: 0 auto 1.5rem;
+}
+
+.cta {
+  display: inline-block;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  background-color: var(--brand-red);
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.note {
+  margin: 1.5rem 0 0;
+  font-size: 0.85rem;
+}
+
+.section {
+  margin-top: 3rem;
+}
+
+.list {
+  padding-left: 1.25rem;
+}
+
+.address {
+  font-style: normal;
+}

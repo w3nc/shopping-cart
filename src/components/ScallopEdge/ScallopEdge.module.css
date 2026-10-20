@@ -1,0 +1,29 @@
+.edge {
+  --scallop-r: clamp(0.875rem, 2.6vw, 1.75rem);
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: var(--scallop-r);
+  background-repeat: repeat-x;
+  background-position: center;
+  background-size: calc(var(--scallop-r) * 2) 100%;
+  pointer-events: none;
+}
+
+.top {
+  bottom: calc(100% - 1px);
+  background-image: radial-gradient(
+    circle at 50% 100%,
+    var(--scallop-color) calc(var(--scallop-r) - 0.5px),
+    transparent var(--scallop-r)
+  );
+}
+
+.bottom {
+  top: calc(100% - 1px);
+  background-image: radial-gradient(
+    circle at 50% 0%,
+    var(--scallop-color) calc(var(--scallop-r) - 0.5px),
+    transparent var(--scallop-r)
+  );
+}

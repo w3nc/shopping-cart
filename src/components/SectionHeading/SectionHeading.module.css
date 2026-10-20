@@ -1,0 +1,23 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.center {
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  max-width: 20em;
+  margin: 0;
+  font-size: var(--text-display-md);
+}
+
+.description {
+  max-width: 40rem;
+  margin: 0;
+  font-size: var(--text-lg);
+  line-height: var(--leading-body);
+}

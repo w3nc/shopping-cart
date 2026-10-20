@@ -1,0 +1,20 @@
+.wordmark {
+  display: inline-flex;
+  flex-direction: column;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.line {
+  display: block;
+}
+
+@media (min-width: 45em) {
+  .wordmark {
+    font-size: 1.3rem;
+  }
+}

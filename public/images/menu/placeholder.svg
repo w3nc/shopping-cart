@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480" role="img" aria-label="Placeholder food photo">
+  <rect width="640" height="480" fill="#FFF7E0" />
+  <circle cx="320" cy="196" r="108" fill="#F6BE00" />
+  <rect x="200" y="330" width="240" height="14" rx="7" fill="#C8102E" />
+  <text x="320" y="190" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="34" font-weight="700" fill="#1B1208">Los Pollos</text>
+  <text x="320" y="234" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="28" font-weight="600" fill="#1B1208">Hermanos</text>
+  <text x="320" y="392" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="22" fill="#1B1208">Photo coming soon</text>
+</svg>

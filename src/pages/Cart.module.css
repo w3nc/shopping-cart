@@ -1,0 +1,45 @@
+.heading {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.list {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 1.5rem;
+}
+
+.count {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.subtotal {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.note {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+}
+
+.empty {
+  margin: 0 0 1rem;
+}
+
+.emptyLink {
+  display: inline-block;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  background-color: var(--brand-red);
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+}

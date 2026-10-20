@@ -1,0 +1,74 @@
+[
+  {
+    "id": "classic-bucket",
+    "name": "The Classic Bucket",
+    "description": "Eight pieces of golden fried chicken with fries and slaw.",
+    "price": 899,
+    "image": "/images/menu/placeholder.svg",
+    "category": "chicken"
+  },
+  {
+    "id": "spicy-bucket",
+    "name": "The Spicy Bucket",
+    "description": "Eight pieces tossed in our red spice blend, with fries and slaw.",
+    "price": 949,
+    "image": "/images/menu/placeholder.svg",
+    "category": "chicken"
+  },
+  {
+    "id": "crispy-chicken-sandwich",
+    "name": "Crispy Chicken Sandwich",
+    "description": "Buttermilk chicken fillet, pickles and house sauce in a soft bun.",
+    "price": 189,
+    "image": "/images/menu/placeholder.svg",
+    "category": "chicken"
+  },
+  {
+    "id": "fried-chicken-rice-bowl",
+    "name": "Fried Chicken Rice Bowl",
+    "description": "Chopped fried chicken over rice with gravy and spring onions.",
+    "price": 179,
+    "image": "/images/menu/placeholder.svg",
+    "category": "chicken"
+  },
+  {
+    "id": "spicy-wings",
+    "name": "Spicy Wings",
+    "description": "Six wings glazed in our hot honey sauce.",
+    "price": 329,
+    "image": "/images/menu/placeholder.svg",
+    "category": "chicken"
+  },
+  {
+    "id": "cheese-fries",
+    "name": "Loaded Cheese Fries",
+    "description": "Fresh cut fries under a slow melted cheese sauce.",
+    "price": 149,
+    "image": "/images/menu/placeholder.svg",
+    "category": "sides"
+  },
+  {
+    "id": "buttermilk-biscuits",
+    "name": "Buttermilk Biscuits",
+    "description": "Three warm biscuits with whipped honey butter.",
+    "price": 99,
+    "image": "/images/menu/placeholder.svg",
+    "category": "sides"
+  },
+  {
+    "id": "creamy-coleslaw",
+    "name": "Creamy Coleslaw",
+    "description": "Shredded cabbage and carrot in a light creamy dressing.",
+    "price": 79,
+    "image": "/images/menu/placeholder.svg",
+    "category": "sides"
+  },
+  {
+    "id": "sweet-iced-tea",
+    "name": "Sweet Iced Tea",
+    "description": "Large glass of house brewed iced tea, served over ice.",
+    "price": 69,
+    "image": "/images/menu/placeholder.svg",
+    "category": "drinks"
+  }
+]

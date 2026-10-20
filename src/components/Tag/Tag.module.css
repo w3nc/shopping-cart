@@ -1,0 +1,29 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.cream {
+  background-color: var(--color-cream-deep);
+  color: var(--color-ink);
+}
+
+.yellow {
+  background-color: var(--color-yellow);
+  color: var(--color-ink);
+}
+
+.ink {
+  background-color: var(--color-ink);
+  color: var(--color-cream);
+}
+
+.red {
+  background-color: var(--color-red);
+  color: var(--color-paper);
+}
