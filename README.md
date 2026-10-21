@@ -75,3 +75,7 @@ public/
 ## Attribution
 
 Los Pollos Hermanos is a fictional restaurant from "Breaking Bad" and "Better Call Saul". This is a fan tribute project for The Odin Project shopping cart assignment, built with original assets only.
+
+## References
+
+Menu and product images sourced from Pinterest.
