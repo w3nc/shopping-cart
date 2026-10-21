@@ -54,9 +54,3 @@
     mask-position: var(--bump-w) 0;
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .edge {
-    animation: none;
-  }
-}

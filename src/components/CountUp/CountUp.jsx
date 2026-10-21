@@ -1,44 +1,58 @@
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import useReducedMotion from "../../hook/useReducedMotion";
 
+// Counts from 0 up to `end` the first time it scrolls into view.
+// The real number is always in the page for screen readers and for people with reduced motion.
 export default function CountUp({ end, suffix = "", duration = 2 }) {
   const counterRef = useRef(null);
+  const reduced = useReducedMotion();
+  const finalText = `${end}${suffix}`;
 
   useGSAP(
     () => {
-      if (!counterRef.current) return;
+      const counter = counterRef.current;
+      if (!counter) return;
 
-      // Respect reduced motion
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        counterRef.current.textContent = `${end}${suffix}`;
+      if (reduced) {
+        counter.textContent = finalText;
         return;
       }
 
-      const obj = { val: 0 };
+      const state = { value: 0 };
+      counter.textContent = `0${suffix}`;
 
-      gsap.to(obj, {
-        val: end,
+      gsap.to(state, {
+        value: end,
         duration,
         ease: "power2.out",
         scrollTrigger: {
-          trigger: counterRef.current,
-          start: "top 85%",
-          once: true, // Only animate once
+          trigger: counter,
+          start: "top 90%",
+          once: true,
         },
         onUpdate: () => {
-          if (counterRef.current) {
-            counterRef.current.textContent = `${Math.floor(obj.val)}${suffix}`;
-          }
+          counter.textContent = `${Math.floor(state.value)}${suffix}`;
+        },
+        onComplete: () => {
+          counter.textContent = finalText;
         },
       });
     },
-    { scope: counterRef },
+    {
+      scope: counterRef,
+      dependencies: [reduced, end, suffix, duration],
+      revertOnUpdate: true,
+    },
   );
 
   return (
-    <span ref={counterRef} aria-label={`${end}${suffix}`}>
-      0{suffix}
-    </span>
+    <>
+      <span className="sr-only">{finalText}</span>
+      <span ref={counterRef} aria-hidden="true">
+        {finalText}
+      </span>
+    </>
   );
 }

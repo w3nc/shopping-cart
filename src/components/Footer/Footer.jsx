@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import ScallopEdge from "../ScallopEdge/ScallopEdge";
+import MotionToggle from "../MotionToggle/MotionToggle";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
@@ -8,7 +9,9 @@ export default function Footer() {
       <ScallopEdge position="top" color="var(--color-yellow)" />
 
       <div className={styles.inner}>
-        <h2 className={styles.wordmark}>Los Pollos Hermanos</h2>
+        <p className={styles.wordmark} aria-hidden="true">
+          Los Pollos Hermanos
+        </p>
 
         <nav aria-label="Footer navigation" className={styles.columns}>
           <div className={styles.column}>
@@ -58,9 +61,12 @@ export default function Footer() {
           </div>
         </nav>
 
-        <p className={styles.copyright}>
-          Los Pollos Hermanos. A made up restaurant for a school project.
-        </p>
+        <div className={styles.bottom}>
+          <p className={styles.copyright}>
+            Los Pollos Hermanos. A made up restaurant for a school project.
+          </p>
+          <MotionToggle />
+        </div>
       </div>
     </footer>
   );

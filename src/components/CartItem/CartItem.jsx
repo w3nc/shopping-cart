@@ -1,22 +1,36 @@
 import QuantityInput from "../QuantityInput/QuantityInput";
+import Photo from "../Photo/Photo";
+import { getMenuPhoto, photoStyle } from "../../data/menuPhotos";
 import { useCart } from "../../context/CartContext";
 import { formatPrice } from "../../utils/currency";
 import styles from "./CartItem.module.css";
 
 export default function CartItem({ item }) {
   const { setQty, increment, decrement, removeItem } = useCart();
+  const mapped = getMenuPhoto(item);
 
   return (
     <li className={styles.row}>
       <div className={styles.imageWrap}>
-        <img
-          className={styles.image}
-          src={item.image}
-          alt=""
-          width="96"
-          height="96"
-          loading="lazy"
-        />
+        {mapped ? (
+          <Photo
+            name={mapped.photo}
+            alt=""
+            sizes="96px"
+            className={styles.image}
+            style={photoStyle(mapped)}
+          />
+        ) : (
+          <img
+            className={styles.image}
+            src={item.image}
+            alt=""
+            width="96"
+            height="96"
+            loading="lazy"
+            decoding="async"
+          />
+        )}
       </div>
 
       <div className={styles.info}>

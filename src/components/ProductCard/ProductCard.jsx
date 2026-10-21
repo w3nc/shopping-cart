@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import QuantityInput from "../QuantityInput/QuantityInput";
 import Button from "../Button/Button";
 import Tag from "../Tag/Tag";
+import Photo from "../Photo/Photo";
+import { getMenuPhoto, photoStyle } from "../../data/menuPhotos";
 import { useCart } from "../../context/CartContext";
 import { formatPrice } from "../../utils/currency";
 import styles from "./ProductCard.module.css";
@@ -17,6 +19,9 @@ export default function ProductCard({ product }) {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, []);
+
+  const mapped = getMenuPhoto(product);
+  const cardSizes = "(min-width: 1280px) 24vw, (min-width: 640px) 46vw, 92vw";
 
   const handleAddToCart = () => {
     addItem(product, quantity);
@@ -35,23 +40,47 @@ export default function ProductCard({ product }) {
       aria-labelledby={`product-title-${product.id}`}
     >
       <div className={styles.imageWrapper}>
-        <img
-          className={styles.image}
-          src={product.image}
-          alt=""
-          width="320"
-          height="240"
-          loading="lazy"
-        />
-        {product.altImage && (
-          <img
-            className={styles.imageHover}
-            src={product.altImage}
-            alt=""
-            width="320"
-            height="240"
-            loading="lazy"
-          />
+        {mapped ? (
+          <>
+            <Photo
+              name={mapped.photo}
+              alt=""
+              sizes={cardSizes}
+              className={styles.image}
+              style={photoStyle(mapped)}
+            />
+            {mapped.altPhoto ? (
+              <Photo
+                name={mapped.altPhoto}
+                alt=""
+                sizes={cardSizes}
+                className={styles.imageHover}
+              />
+            ) : null}
+          </>
+        ) : (
+          <>
+            <img
+              className={styles.image}
+              src={product.image}
+              alt=""
+              width="320"
+              height="240"
+              loading="lazy"
+              decoding="async"
+            />
+            {product.altImage && (
+              <img
+                className={styles.imageHover}
+                src={product.altImage}
+                alt=""
+                width="320"
+                height="240"
+                loading="lazy"
+                decoding="async"
+              />
+            )}
+          </>
         )}
       </div>
 

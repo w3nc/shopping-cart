@@ -40,7 +40,7 @@
 }
 
 .primary:hover:not(:disabled) {
-  background-color: #a80c26;
+  background-color: var(--color-red-deep);
   color: var(--color-cream);
 }
 
@@ -65,7 +65,7 @@
 }
 
 .sm {
-  min-height: 40px;
+  min-height: var(--tap-min);
   padding: 0 var(--space-4);
   font-size: var(--text-sm);
 }

@@ -76,4 +76,14 @@
   --nav-height: 72px;
   --nav-max-height: 80px;
   --scallop-h: 24px;
+  --tap-min: 44px;
+
+  /* Stacking order */
+  --z-nav: 50;
+  --z-skip: 70;
+  --z-cursor: 200;
+
+  /* Extra brand shades */
+  --color-red-deep: #a80c26;
+  --color-yellow-deep: #dba800;
 }

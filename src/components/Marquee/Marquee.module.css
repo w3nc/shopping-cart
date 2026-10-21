@@ -1,6 +1,5 @@
 .wrapper {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
+  width: 100%;
   background-color: var(--color-yellow);
   color: var(--color-text);
   padding: var(--space-3) 0;
@@ -39,9 +38,8 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .track {
-    animation: none;
-    transform: none;
-  }
+.unit {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
 }

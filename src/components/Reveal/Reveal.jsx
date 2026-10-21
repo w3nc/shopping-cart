@@ -2,9 +2,12 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import useReducedMotion from "../../hook/useReducedMotion";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Fades and lifts its content into view as it scrolls on screen.
+// stagger > 0 animates the direct children one after another instead of the whole block.
 export default function Reveal({
   children,
   className = "",
@@ -13,18 +16,15 @@ export default function Reveal({
   duration = 0.6,
 }) {
   const container = useRef(null);
+  const reduced = useReducedMotion();
 
   useGSAP(
     () => {
       const target = container.current;
-      if (!target) return;
+      if (!target || reduced) return;
 
-      // Check for reduced motion
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-      // If stagger > 0, we animate the children (e.g., grid items).
-      // If stagger === 0, we animate the container itself.
-      const elements = stagger > 0 ? target.children : target;
+      const elements =
+        stagger > 0 ? gsap.utils.toArray(target.children) : target;
 
       gsap.fromTo(
         elements,
@@ -35,18 +35,19 @@ export default function Reveal({
           duration,
           stagger: stagger > 0 ? stagger : 0,
           ease: "power2.out",
-          invalidateOnRefresh: true,
           scrollTrigger: {
             trigger: target,
-            start: "top 85%",
+            start: "top 88%",
             toggleActions: "play none none none",
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
           },
         },
       );
     },
-    { scope: container },
+    {
+      scope: container,
+      dependencies: [reduced, stagger, y, duration],
+      revertOnUpdate: true,
+    },
   );
 
   return (

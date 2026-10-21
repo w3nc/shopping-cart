@@ -1,0 +1,26 @@
+.dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-cursor);
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border: 2px solid var(--color-cream);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-ink);
+  pointer-events: none;
+  opacity: 0;
+  scale: 1;
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    scale var(--duration-base) var(--ease-out);
+}
+
+.dot[data-visible="true"] {
+  opacity: 1;
+}
+
+.dot[data-active="true"] {
+  scale: 2.4;
+}

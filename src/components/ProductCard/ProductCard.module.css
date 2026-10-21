@@ -31,7 +31,8 @@
   opacity: 0;
 }
 
-.card:hover .imageHover {
+.card:hover .imageHover,
+.card:focus-within .imageHover {
   opacity: 1;
 }
 

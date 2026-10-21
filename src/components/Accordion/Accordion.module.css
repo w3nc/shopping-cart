@@ -28,11 +28,18 @@
   font-weight: 700;
   text-align: left;
   color: var(--color-text);
+  min-height: var(--tap-min);
   transition: background-color var(--duration-fast) var(--ease-out);
 }
 
 .trigger:hover {
   background-color: var(--color-butter);
+}
+
+/* The item clips its corners, so the focus ring is drawn inside the button */
+.trigger:focus-visible {
+  outline-offset: -5px;
+  border-radius: var(--radius-lg);
 }
 
 .icon {
@@ -58,6 +65,8 @@
 
 .content {
   overflow: hidden;
+  visibility: hidden; /* closed answers are hidden from keyboards and screen readers too */
+  transition: visibility 0s linear var(--duration-base);
   padding: 0 var(--space-6);
   color: var(--color-text-soft);
   font-size: var(--text-base);
@@ -65,5 +74,7 @@
 }
 
 .panel[data-open="true"] .content {
+  visibility: visible;
+  transition-delay: 0s;
   padding-bottom: var(--space-5);
 }

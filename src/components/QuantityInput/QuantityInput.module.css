@@ -1,31 +1,40 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: var(--space-1);
 }
 
 .label {
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-text);
 }
 
 .controls {
   display: inline-flex;
   align-items: stretch;
-  border: 1px solid rgba(27, 18, 8, 0.2);
-  border-radius: 999px;
+  width: fit-content;
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-pill);
   overflow: hidden;
-  background-color: #ffffff;
+  background-color: var(--color-surface);
 }
 
 .button {
-  width: 2.25rem;
+  width: var(--tap-min);
+  min-height: var(--tap-min);
   border: 0;
   background-color: transparent;
   color: inherit;
-  font-size: 1.1rem;
+  font-size: var(--text-xl);
   font-weight: 700;
+  line-height: 1;
   cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.button:hover:not(:disabled) {
+  background-color: var(--color-butter);
 }
 
 .button:disabled {
@@ -34,17 +43,21 @@
 }
 
 .input {
-  width: 3.25rem;
-  padding: 0.4rem 0;
+  width: 3.5rem;
+  min-height: var(--tap-min);
+  padding: 0;
   border: 0;
   background-color: transparent;
   color: inherit;
   font: inherit;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
   text-align: center;
 }
 
 .button:focus-visible,
 .input:focus-visible {
-  outline: 2px solid var(--brand-red);
-  outline-offset: -2px;
+  outline: 3px solid var(--color-ink);
+  outline-offset: -5px;
+  border-radius: var(--radius-pill);
 }

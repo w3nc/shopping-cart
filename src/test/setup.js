@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom/vitest";
 import { cleanup } from "@testing-library/react";
-import { afterEach, vi } from "vitest";
+import { afterEach, beforeEach, vi } from "vitest";
+import { setMotion } from "../utils/motion";
 
 // --- IntersectionObserver ---
 class IntersectionObserverStub {
@@ -73,21 +74,30 @@ vi.mock("gsap", () => ({
     registerPlugin: vi.fn(),
     fromTo: vi.fn(),
     to: vi.fn(),
+    set: vi.fn(),
+    quickTo: vi.fn(() => vi.fn()),
+    killTweensOf: vi.fn(),
     context: vi.fn(),
+    utils: { toArray: vi.fn(() => []) },
   },
   gsap: {
     registerPlugin: vi.fn(),
     fromTo: vi.fn(),
     to: vi.fn(),
+    set: vi.fn(),
+    quickTo: vi.fn(() => vi.fn()),
+    killTweensOf: vi.fn(),
     context: vi.fn(),
+    utils: { toArray: vi.fn(() => []) },
   },
 }));
 
 vi.mock("gsap/ScrollTrigger", () => ({
   ScrollTrigger: {
     create: vi.fn(() => ({ kill: vi.fn() })),
+    refresh: vi.fn(),
+    getAll: vi.fn(() => []),
     registerPlugin: vi.fn(),
-    config: vi.fn(),
   },
 }));
 
@@ -97,6 +107,13 @@ vi.mock("@gsap/react", () => ({
   }),
 }));
 
+// Every test starts with motion switched off, so nothing animates and
+// nothing is hidden waiting for a scroll trigger.
+beforeEach(() => {
+  setMotion("reduce");
+});
+
 afterEach(() => {
   cleanup();
+  window.localStorage.clear();
 });

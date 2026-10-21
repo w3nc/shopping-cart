@@ -30,7 +30,7 @@ describe("Footer", () => {
       name: "Footer navigation",
     });
     expect(footerNav).toBeInTheDocument();
-    expect(screen.getAllByRole("heading", { level: 2 }).length).toBe(4);
+    expect(screen.getAllByRole("heading", { level: 2 }).length).toBe(3);
 
     expect(screen.getByRole("link", { name: "Full menu" })).toHaveAttribute(
       "href",

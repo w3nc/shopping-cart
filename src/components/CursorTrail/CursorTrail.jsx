@@ -1,117 +1,105 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import photos from "../../assets/photos";
+import { trailPhotos } from "../../data/menuPhotos";
+import useReducedMotion from "../../hook/useReducedMotion";
 import styles from "./CursorTrail.module.css";
 
-// Replace these with real food or restaurant images later
-const IMAGES = [
-  "/images/menu/cursor-1.jpg",
-  "/images/menu/cursor-2.jpg",
-  "/images/menu/cursor-3.jpg",
-];
-
 const POOL_SIZE = 12;
-const THROTTLE_DISTANCE = 60; // pixels
-const IMAGE_SIZE = 80; // pixels
+const SPAWN_DISTANCE = 70; // pixels the mouse must travel before the next photo pops up
+const IMAGE_WIDTH = 96;
+const IMAGE_HEIGHT = 120;
 
+// Photos pop up behind the mouse inside the "Visit us" section and fade away after about a second.
+// A fixed pool of elements is reused and moved with GSAP, so React state never changes while the mouse moves.
 export default function CursorTrail() {
   const containerRef = useRef(null);
   const poolRef = useRef([]);
-  const lastPos = useRef({ x: 0, y: 0 });
-  const currentIndex = useRef(0);
+  const lastPoint = useRef({ x: -9999, y: -9999 });
+  const nextIndex = useRef(0);
+  const reduced = useReducedMotion();
 
   useEffect(() => {
-    // 1. Environment Checks
-    const isFinePointer = window.matchMedia("(pointer: fine)").matches;
-    const isHover = window.matchMedia("(hover: hover)").matches;
-    const isReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    // Disable on touch devices and reduced motion
-    if (!isFinePointer || !isHover || isReducedMotion) return;
-
     const container = containerRef.current;
-    if (!container) return;
+    if (!container || reduced) return undefined;
 
-    const handleMouseMove = (event) => {
+    const handleMove = (event) => {
+      // Mouse and pen only. Touch has no hover, so it never leaves a trail.
+      if (event.pointerType === "touch") return;
+
       const rect = container.getBoundingClientRect();
-
-      // Check if the mouse is actually inside the Visit Us section
-      const isInside =
+      const inside =
         event.clientX >= rect.left &&
         event.clientX <= rect.right &&
         event.clientY >= rect.top &&
         event.clientY <= rect.bottom;
+      if (!inside) return;
 
-      if (!isInside) return;
-
-      // Calculate position relative to the container
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
 
-      // Throttle by distance moved
-      const dist = Math.hypot(x - lastPos.current.x, y - lastPos.current.y);
-      if (dist < THROTTLE_DISTANCE) return;
+      const travelled = Math.hypot(x - lastPoint.current.x, y - lastPoint.current.y);
+      if (travelled < SPAWN_DISTANCE) return;
+      lastPoint.current = { x, y };
 
-      lastPos.current = { x, y };
-
-      // Get next node from the pool
-      const node = poolRef.current[currentIndex.current];
+      const node = poolRef.current[nextIndex.current];
+      nextIndex.current = (nextIndex.current + 1) % POOL_SIZE;
       if (!node) return;
 
-      currentIndex.current = (currentIndex.current + 1) % POOL_SIZE;
-
-      // Pick an image
-      const imgIndex = currentIndex.current % IMAGES.length;
-      node.style.backgroundImage = `url(${IMAGES[imgIndex]})`;
-
-      // Kill any existing tweens on this node
       gsap.killTweensOf(node);
-
-      // Set initial position and state
       gsap.set(node, {
-        x: x - IMAGE_SIZE / 2,
-        y: y - IMAGE_SIZE / 2,
-        scale: 1,
-        opacity: 1,
-        rotation: (Math.random() - 0.5) * 20, // slight random rotation for organic feel
-      });
-
-      // Animate out
-      gsap.to(node, {
-        scale: 0,
+        x: x - IMAGE_WIDTH / 2,
+        y: y - IMAGE_HEIGHT / 2,
+        scale: 0.55,
         opacity: 0,
-        duration: 1,
-        ease: "power2.out",
+        rotation: (Math.random() - 0.5) * 22,
       });
+      gsap
+        .timeline()
+        .to(node, { scale: 1, opacity: 1, duration: 0.18, ease: "power2.out" })
+        .to(node, {
+          scale: 0.8,
+          opacity: 0,
+          duration: 0.5,
+          ease: "power2.in",
+          delay: 0.4,
+        });
     };
 
-    // Attach to window because the container has pointer-events: none
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("pointermove", handleMove, { passive: true });
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      // Clean up any lingering GSAP animations
+      window.removeEventListener("pointermove", handleMove);
       poolRef.current.forEach((node) => {
-        if (node) gsap.killTweensOf(node);
+        if (node) {
+          gsap.killTweensOf(node);
+          gsap.set(node, { opacity: 0 });
+        }
       });
     };
-  }, []);
+  }, [reduced]);
 
   return (
-    <div
-      className={styles.trailContainer}
-      ref={containerRef}
-      aria-hidden="true"
-    >
-      {Array.from({ length: POOL_SIZE }).map((_, i) => (
-        <div
-          key={i}
-          ref={(el) => (poolRef.current[i] = el)}
-          className={styles.trailImage}
-          style={{ opacity: 0 }}
-        />
-      ))}
+    <div className={styles.trailContainer} ref={containerRef} aria-hidden="true">
+      {Array.from({ length: POOL_SIZE }).map((_, index) => {
+        const photo = photos[trailPhotos[index % trailPhotos.length]];
+        return (
+          <img
+            key={index}
+            ref={(element) => {
+              poolRef.current[index] = element;
+            }}
+            className={styles.trailImage}
+            src={photo.small}
+            alt=""
+            width={IMAGE_WIDTH}
+            height={IMAGE_HEIGHT}
+            loading="lazy"
+            decoding="async"
+            draggable="false"
+          />
+        );
+      })}
     </div>
   );
 }

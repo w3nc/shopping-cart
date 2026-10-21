@@ -1,4 +1,7 @@
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Layout from "./components/Layout/Layout";
 import { CartProvider } from "./context/CartContext";
 import Home from "./pages/Home";
@@ -6,7 +9,30 @@ import Shop from "./pages/Shop";
 import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function App() {
+  useEffect(() => {
+    // 1. Refresh once fonts are fully loaded
+    document.fonts?.ready?.then(() => {
+      ScrollTrigger.refresh();
+    });
+
+    // 2. Refresh on window load (catches images)
+    const handleLoad = () => ScrollTrigger.refresh();
+    window.addEventListener("load", handleLoad);
+
+    // 3. Safety refresh after a brief delay just for Chrome
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 500);
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+      clearTimeout(timer);
+    };
+  }, []);
+
   return (
     <CartProvider>
       <Routes>
