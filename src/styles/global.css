@@ -103,8 +103,8 @@ ol {
 }
 
 /* Motion is controlled by <html data-motion="full | reduce">.
-   src/utils/motion.js sets it from the visitor's own switch first,
-   and from the operating system setting (prefers-reduced-motion) second. */
+   src/utils/motion.js defaults to "full" and only switches to "reduce"
+   when the visitor turns on the footer switch. */
 html[data-motion="reduce"] *,
 html[data-motion="reduce"] *::before,
 html[data-motion="reduce"] *::after {

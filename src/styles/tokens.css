@@ -75,6 +75,7 @@
   --container-pad: clamp(1rem, 4vw, 2rem);
   --nav-height: 72px;
   --nav-max-height: 80px;
+  --nav-height-compact: 56px;
   --scallop-h: 24px;
   --tap-min: 44px;
 

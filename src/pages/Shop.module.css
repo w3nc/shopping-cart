@@ -17,6 +17,7 @@
   color: var(--color-text-soft);
 }
 
+/* Four cards per row on desktop, two on tablets, one on phones. */
 .grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -31,14 +32,22 @@
 
 @media (min-width: 1024px) {
   .grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
-@media (min-width: 1280px) {
-  .grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+.category + .category {
+  margin-top: var(--space-8);
+}
+
+.categoryLabel {
+  display: inline-block;
+  margin-bottom: var(--space-5);
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-yellow);
+  color: var(--color-ink);
+  font-size: var(--text-xl);
 }
 
 .gridItem {
@@ -78,8 +87,13 @@
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 /* Error */

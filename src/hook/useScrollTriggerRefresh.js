@@ -1,9 +1,7 @@
 import { useEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// ScrollTrigger measures the page once. Our page keeps growing after that
-// (menu data arrives, fonts swap, images load), which leaves every trigger
-// pointing at the wrong spot. This asks it to measure again when that happens.
+// Refreshes ScrollTrigger when the page grows (menu data, fonts, images).
 export default function useScrollTriggerRefresh() {
   useEffect(() => {
     let timer = 0;

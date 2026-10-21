@@ -41,10 +41,19 @@ describe("getMenuPhoto", () => {
   });
 
   it("steps aside when menu.json has a real image path", () => {
-    const item = { title: "Pollo Wrap", image: "/images/menu/wrap.jpg" };
+    const item = { title: "Mystery Dish", image: "/images/menu/mystery.jpg" };
 
     expect(hasRealImage(item)).toBe(true);
     expect(getMenuPhoto(item)).toBeNull();
+  });
+});
+
+describe("pinned menu photos", () => {
+  it("uses our own photo even when menu.json has an image path", () => {
+    const item = { title: "Pollos Wrap", image: "/images/menu/pollo-wrap.jpg" };
+
+    expect(getMenuPhoto(item).photo).toBe("wrap");
+    expect(photos.wrap).toBeDefined();
   });
 });
 

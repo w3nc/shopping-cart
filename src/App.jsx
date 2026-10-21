@@ -13,19 +13,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
   useEffect(() => {
-    // 1. Refresh once fonts are fully loaded
-    document.fonts?.ready?.then(() => {
-      ScrollTrigger.refresh();
-    });
+    document.fonts?.ready?.then(() => ScrollTrigger.refresh());
 
-    // 2. Refresh on window load (catches images)
     const handleLoad = () => ScrollTrigger.refresh();
     window.addEventListener("load", handleLoad);
 
-    // 3. Safety refresh after a brief delay just for Chrome
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 500);
+    const timer = setTimeout(() => ScrollTrigger.refresh(), 500);
 
     return () => {
       window.removeEventListener("load", handleLoad);

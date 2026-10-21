@@ -1,10 +1,10 @@
 [
   {
     "id": 1,
-    "title": "Pollo Classic Combo",
-    "price": 9.99,
+    "title": "Crispy Time Combo",
+    "price": 30.0,
     "category": "combos",
-    "description": "Half chicken, crispy skin, two sides, and a warm biscuit.",
+    "description": "Juicy chicken, crispy skin, two sides, and a cold lemon tea.",
     "image": "/images/menu/classic-combo.jpg",
     "altImage": "/images/menu/classic-combo.jpg",
     "tags": ["Signature", "Crispy"],
@@ -22,19 +22,41 @@
     "featured": true
   },
   {
+    "id": 10,
+    "title": "Family Combo",
+    "price": 34.99,
+    "category": "combos",
+    "description": "Eight pieces of fried chicken, fries, three dipping sauces, and a cold cola to share.",
+    "image": "/images/menu/family-bucket.jpg",
+    "altImage": "/images/menu/family-bucket.jpg",
+    "tags": ["Family", "Shareable"],
+    "featured": false
+  },
+  {
+    "id": 12,
+    "title": "Solo Crispy Meal",
+    "price": 12.99,
+    "category": "combos",
+    "description": "Two pieces of crispy fried chicken with a small fries and a cold drink, just for you.",
+    "image": "/images/menu/classic-combo.jpg",
+    "altImage": "/images/menu/classic-combo.jpg",
+    "tags": ["Solo", "Crispy"],
+    "featured": false
+  },
+  {
     "id": 3,
-    "title": "Spicy Pollo Sandwich",
+    "title": "Spicy Chicken Tenders",
     "price": 8.49,
     "category": "chicken",
     "description": "Buttermilk fillet tossed in red spice, pickles, and house sauce.",
     "image": "/images/menu/spicy-sandwich.jpg",
     "altImage": "/images/menu/spicy-sandwich.jpg",
-    "tags": ["Spicy", "Sandwich"],
+    "tags": ["Spicy", "Crispy"],
     "featured": true
   },
   {
     "id": 4,
-    "title": "Pollo Wrap",
+    "title": "Pollos Wrap",
     "price": 7.29,
     "category": "chicken",
     "description": "Crispy chicken strips, slaw, and ranch in a warm flour tortilla.",
@@ -44,11 +66,33 @@
     "featured": false
   },
   {
+    "id": 11,
+    "title": "Crispy Chicken Nuggets",
+    "price": 6.49,
+    "category": "chicken",
+    "description": "Golden, bite-size chicken nuggets served with ketchup and ranch for dipping.",
+    "image": "/images/menu/spicy-sandwich.jpg",
+    "altImage": "/images/menu/spicy-sandwich.jpg",
+    "tags": ["Crispy", "Kid friendly"],
+    "featured": false
+  },
+  {
+    "id": 13,
+    "title": "Golden Wings",
+    "price": 8.99,
+    "category": "chicken",
+    "description": "Six crispy wings tossed in our house spice, served with a cool ranch dip.",
+    "image": "/images/menu/spicy-sandwich.jpg",
+    "altImage": "/images/menu/spicy-sandwich.jpg",
+    "tags": ["Spicy", "Shareable"],
+    "featured": false
+  },
+  {
     "id": 5,
-    "title": "Curly Fries Basket",
-    "price": 4.49,
+    "title": "French Fries Friends",
+    "price": 1.5,
     "category": "sides",
-    "description": "A generous basket of seasoned curly fries.",
+    "description": "A generous amount of seasoned french fries.",
     "image": "/images/menu/curly-fries.jpg",
     "altImage": "/images/menu/curly-fries.jpg",
     "tags": ["Crispy", "Shareable"],
@@ -56,13 +100,35 @@
   },
   {
     "id": 6,
-    "title": "Hermanos Sauce Bottle",
+    "title": "Hermanos Sauce",
     "price": 6.99,
     "category": "sides",
     "description": "A take-home bottle of our signature dipping sauce.",
     "image": "/images/menu/sauce-bottle.jpg",
     "altImage": "/images/menu/sauce-bottle.jpg",
     "tags": ["Take home", "Signature"],
+    "featured": false
+  },
+  {
+    "id": 14,
+    "title": "Creamy Coleslaw",
+    "price": 2.49,
+    "category": "sides",
+    "description": "Cool, crunchy cabbage in a tangy creamy dressing, the classic partner for fried chicken.",
+    "image": "/images/menu/curly-fries.jpg",
+    "altImage": "/images/menu/curly-fries.jpg",
+    "tags": ["Fresh", "Cold"],
+    "featured": false
+  },
+  {
+    "id": 15,
+    "title": "Mac and Cheese",
+    "price": 3.99,
+    "category": "sides",
+    "description": "Creamy baked macaroni with a golden cheesy crust.",
+    "image": "/images/menu/curly-fries.jpg",
+    "altImage": "/images/menu/curly-fries.jpg",
+    "tags": ["Comfort", "Cheesy"],
     "featured": false
   },
   {
@@ -88,6 +154,28 @@
     "featured": false
   },
   {
+    "id": 16,
+    "title": "Vanilla Milkshake",
+    "price": 4.49,
+    "category": "drinks",
+    "description": "Thick vanilla milkshake topped with whipped cream and a striped straw.",
+    "image": "/images/menu/lemonade.jpg",
+    "altImage": "/images/menu/lemonade.jpg",
+    "tags": ["Creamy", "Cold"],
+    "featured": false
+  },
+  {
+    "id": 17,
+    "title": "Orange Mint Cooler",
+    "price": 3.49,
+    "category": "drinks",
+    "description": "Fresh orange juice over ice with a sprig of mint and an orange slice.",
+    "image": "/images/menu/lemonade.jpg",
+    "altImage": "/images/menu/lemonade.jpg",
+    "tags": ["Fresh", "Cold"],
+    "featured": false
+  },
+  {
     "id": 9,
     "title": "Churro Bites",
     "price": 5.49,
@@ -96,6 +184,39 @@
     "image": "/images/menu/churro-bites.jpg",
     "altImage": "/images/menu/churro-bites.jpg",
     "tags": ["Sweet", "Shareable"],
+    "featured": false
+  },
+  {
+    "id": 18,
+    "title": "Vanilla Soft Serve",
+    "price": 2.99,
+    "category": "desserts",
+    "description": "A smooth swirl of creamy vanilla soft serve in a cup.",
+    "image": "/images/menu/churro-bites.jpg",
+    "altImage": "/images/menu/churro-bites.jpg",
+    "tags": ["Sweet", "Cold"],
+    "featured": false
+  },
+  {
+    "id": 19,
+    "title": "Banana Pudding Cup",
+    "price": 3.99,
+    "category": "desserts",
+    "description": "Layers of vanilla custard, ripe banana, and crunchy wafers in a cup.",
+    "image": "/images/menu/churro-bites.jpg",
+    "altImage": "/images/menu/churro-bites.jpg",
+    "tags": ["Sweet", "Classic"],
+    "featured": false
+  },
+  {
+    "id": 20,
+    "title": "Chocolate Brownie",
+    "price": 3.49,
+    "category": "desserts",
+    "description": "A warm fudgy brownie square with a rich chocolate center.",
+    "image": "/images/menu/churro-bites.jpg",
+    "altImage": "/images/menu/churro-bites.jpg",
+    "tags": ["Sweet", "Chocolatey"],
     "featured": false
   }
 ]

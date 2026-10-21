@@ -85,9 +85,9 @@ export default function ProductCard({ product }) {
       </div>
 
       <div className={styles.content}>
-        <h2 className={styles.title} id={`product-title-${product.id}`}>
+        <h3 className={styles.title} id={`product-title-${product.id}`}>
           {product.title}
-        </h2>
+        </h3>
 
         {product.tags && product.tags.length > 0 && (
           <div className={styles.tags}>

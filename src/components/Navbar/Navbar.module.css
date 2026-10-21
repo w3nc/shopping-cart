@@ -3,38 +3,59 @@
   top: 0;
   z-index: 50;
   padding: var(--space-3) var(--container-pad) 0;
+  /* The header always reserves the full-size bar's space. The bar inside
+     shrinks, but the page below it never moves, so scrolling can't feed back
+     into the scroll position and cause jitter. */
+  height: calc(var(--nav-height) + var(--space-3));
   pointer-events: none;
 }
 
+/* --nav-p is the transition progress: 0 = full bar at the top of the page,
+   1 = compact pill. Navbar.jsx drives it from the scroll position, and every
+   value below is interpolated from it with calc(), so all properties move
+   together, frame by frame, in either scroll direction. */
 .nav {
+  --nav-p: 0;
+
+  /* Full width = the page container's content box, so the logo lines up with
+     the page content and the cart with its right edge. */
+  --nav-w-full: calc(var(--container-max) - 2 * var(--container-pad));
+  /* Compact width hugs the content. Navbar.jsx measures the real width and
+     overrides this; 760px is only the fallback before that runs. */
+  --nav-w-compact: 760px;
+  --nav-h-full: var(--nav-height);
+  --nav-h-compact: var(--nav-height-compact);
+
   pointer-events: auto;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-4);
-  width: 100%;
-  max-width: 1080px;
+  /* Minimum space between logo, links and cart. This is the spacing you see
+     once the bar has shrunk to fit its content. */
+  gap: var(--space-5);
+  width: min(
+    100%,
+    calc(
+      var(--nav-w-full) + (var(--nav-w-compact) - var(--nav-w-full)) *
+        var(--nav-p)
+    )
+  );
   margin: 0 auto;
-  height: var(--nav-height);
-  max-height: var(--nav-max-height);
-  padding: 0 var(--space-2) 0 var(--space-5);
+  height: calc(
+    var(--nav-h-full) + (var(--nav-h-compact) - var(--nav-h-full)) *
+      var(--nav-p)
+  );
+  /* No padding at the top (edges align with the page), a small inset once compact */
+  padding: 0 calc(6px * var(--nav-p)) 0 calc(var(--space-4) * var(--nav-p));
   border-radius: var(--radius-pill);
-  
-  /* Default: Transparent at the top */
-  background-color: transparent;
-  box-shadow: none;
-  transition: background-color var(--duration-base) var(--ease-out),
-              box-shadow var(--duration-base) var(--ease-out),
-              backdrop-filter var(--duration-base) var(--ease-out);
-}
 
-/* GSAP adds this class via ScrollTrigger */
-.nav.isScrolled {
-  background-color: rgba(255, 253, 246, 0.85); /* --color-surface with opacity */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: var(--shadow-nav);
+  /* Transparent at the top, frosted surface when compact */
+  background-color: rgb(255 253 246 / calc(var(--nav-p) * 0.5));
+  -webkit-backdrop-filter: blur(calc(var(--nav-p) * 14px))
+    saturate(calc(1 + var(--nav-p) * 0.4));
+  backdrop-filter: blur(calc(var(--nav-p) * 14px))
+    saturate(calc(1 + var(--nav-p) * 0.4));
 }
 
 .brand {
@@ -47,10 +68,10 @@
   transition: color var(--duration-fast) var(--ease-out);
 }
 
-.brand > span {
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.logo {
+  display: block;
+  width: calc(36px - 6px * var(--nav-p));
+  height: auto;
 }
 
 .brand:hover {
@@ -60,7 +81,7 @@
 .links {
   display: flex;
   align-items: center;
-  gap: var(--space-6);
+  gap: calc(var(--space-6) - var(--space-2) * var(--nav-p));
   margin: 0;
   padding: 0;
   list-style: none;
@@ -99,7 +120,7 @@
   align-items: center;
   gap: var(--space-2);
   min-height: var(--tap-min);
-  padding: 0 var(--space-4);
+  padding: 0 calc(var(--space-4) - var(--space-1) * var(--nav-p));
   background-color: var(--color-text);
   color: var(--color-cream);
   border-radius: var(--radius-pill);
@@ -156,8 +177,6 @@
 @media (max-width: 768px) {
   .nav {
     gap: var(--space-2);
-    padding-left: var(--space-4);
-    padding-right: var(--space-3);
   }
 
   .links {

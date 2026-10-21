@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem/CartItem";
 import Container from "../components/Container/Container";
 import Button from "../components/Button/Button";

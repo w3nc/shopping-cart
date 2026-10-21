@@ -1,11 +1,5 @@
-// One place that decides whether the site animates.
-//
-// Order of priority:
-//   1. A choice the visitor made with the "Reduce motion" switch (saved in localStorage)
-//   2. The operating system / browser setting (prefers-reduced-motion)
-//
-// The result is mirrored onto <html data-motion="full | reduce"> so CSS can react to it,
-// and React components can subscribe through the useReducedMotion hook.
+// Controls site animation. Defaults to "full"; only the visitor's "Reduce
+// motion" switch changes it, not the OS setting. Mirrored on data-motion.
 
 const STORAGE_KEY = "lph-motion";
 const QUERY = "(prefers-reduced-motion: reduce)";
@@ -65,7 +59,7 @@ export function clearMotionOverride() {
   } catch {
     // ignore
   }
-  publish(systemPrefersReducedMotion() ? "reduce" : "full");
+  publish("full");
 }
 
 export function subscribeMotion(listener) {
@@ -74,19 +68,5 @@ export function subscribeMotion(listener) {
 }
 
 export function initMotion() {
-  publish(readStored() ?? (systemPrefersReducedMotion() ? "reduce" : "full"));
-
-  if (typeof window.matchMedia !== "function") return;
-  const query = window.matchMedia(QUERY);
-  const onChange = () => {
-    if (readStored() === null) {
-      publish(systemPrefersReducedMotion() ? "reduce" : "full");
-    }
-  };
-
-  if (query.addEventListener) {
-    query.addEventListener("change", onChange);
-  } else if (query.addListener) {
-    query.addListener(onChange);
-  }
+  publish(readStored() ?? "full");
 }

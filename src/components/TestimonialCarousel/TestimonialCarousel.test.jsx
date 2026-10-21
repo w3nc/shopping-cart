@@ -11,7 +11,7 @@ describe("TestimonialCarousel", () => {
       screen.getByRole("group", { name: "Customer testimonials" }),
     ).toBeInTheDocument();
     expect(screen.getByRole("group", { name: "1 of 3" })).toHaveTextContent(
-      "Marcus T.",
+      "Walter White",
     );
     expect(screen.queryByRole("group", { name: "2 of 3" })).not.toBeInTheDocument();
   });
@@ -22,13 +22,13 @@ describe("TestimonialCarousel", () => {
 
     await user.click(screen.getByRole("button", { name: "Next testimonial" }));
     expect(screen.getByRole("group", { name: "2 of 3" })).toHaveTextContent(
-      "Elena R.",
+      "Walt",
     );
 
     await user.click(screen.getByRole("button", { name: "Previous testimonial" }));
     await user.click(screen.getByRole("button", { name: "Previous testimonial" }));
     expect(screen.getByRole("group", { name: "3 of 3" })).toHaveTextContent(
-      "Devon K.",
+      "Walt & Jesse",
     );
   });
 });

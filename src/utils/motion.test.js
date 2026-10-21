@@ -44,4 +44,13 @@ describe("motion preference", () => {
     expect(hasMotionOverride()).toBe(false);
     expect(getMotion()).toBe("full");
   });
+
+  it("starts with animations on when the visitor has made no choice", () => {
+    window.localStorage.clear();
+
+    initMotion();
+
+    expect(getMotion()).toBe("full");
+    expect(document.documentElement.dataset.motion).toBe("full");
+  });
 });

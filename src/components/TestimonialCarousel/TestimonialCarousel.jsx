@@ -7,23 +7,23 @@ const testimonials = [
   {
     quote:
       "The chicken is always crispy, never greasy. It feels like a Sunday dinner at my grandmother's house.",
-    name: "Marcus T.",
+    name: "Walter White",
     role: "Local regular",
-    photo: "bucket2",
+    photo: "walt",
   },
   {
     quote:
       "I stop by for the spicy sandwich at least twice a week. The staff knows my order before I reach the counter.",
-    name: "Elena R.",
+    name: "Walt",
     role: "Downtown worker",
-    photo: "tender",
+    photo: "walt2",
   },
   {
     quote:
       "We ordered the family bucket for a small party. Everything arrived hot and the sides were fantastic.",
-    name: "Devon K.",
-    role: "First-time visitor",
-    photo: "bucket",
+    name: "Walt & Jesse",
+    role: "First-time visitors",
+    photo: "waltJesse",
   },
 ];
 

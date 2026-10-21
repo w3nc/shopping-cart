@@ -1,34 +1,113 @@
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { useCart } from "../../context/CartContext";
-import Wordmark from "../Wordmark/Wordmark";
+import useReducedMotion from "../../hook/useReducedMotion";
 import styles from "./Navbar.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
+
+// How far the visitor scrolls (px) while the bar morphs from full to compact.
+const COMPACT_DISTANCE = 140;
+
+// How long the bar takes to catch up with the scrollbar.
+const SCRUB_SMOOTHING = 0.5;
+
+// With reduced motion the bar skips the morph and simply switches state here.
+const REDUCED_MOTION_SNAP_AT = 20;
 
 export default function Navbar() {
   const { totalItems } = useCart();
   const [open, setOpen] = useState(false);
   const toggleRef = useRef(null);
   const navRef = useRef(null);
+  const linksRef = useRef(null);
+  const actionsRef = useRef(null);
   const itemLabel = totalItems === 1 ? "item" : "items";
 
-  useEffect(() => {
+  const reduced = useReducedMotion();
+
+  // The navbar is driven by one number, --nav-p (0 = full bar, 1 = compact
+  // pill), tied to scroll progress so the morph follows the scroll both ways.
+  useGSAP(
+    () => {
+      const nav = navRef.current;
+      if (!nav) return;
+
+      if (reduced) {
+        nav.style.setProperty("--nav-p", window.scrollY > REDUCED_MOTION_SNAP_AT ? "1" : "0");
+        ScrollTrigger.create({
+          start: REDUCED_MOTION_SNAP_AT,
+          end: "max",
+          onToggle: (self) =>
+            nav.style.setProperty("--nav-p", self.isActive ? "1" : "0"),
+        });
+        return;
+      }
+
+      gsap.fromTo(
+        nav,
+        { "--nav-p": 0 },
+        {
+          "--nav-p": 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: document.documentElement,
+            start: 0,
+            end: COMPACT_DISTANCE,
+            scrub: SCRUB_SMOOTHING,
+          },
+        },
+      );
+    },
+    { scope: navRef, dependencies: [reduced], revertOnUpdate: true },
+  );
+
+  // The compact pill must fit its content, so we measure its width and pass it
+  // as --nav-w-compact (CSS can't animate to fit-content).
+  useLayoutEffect(() => {
     const nav = navRef.current;
-    if (!nav) return;
+    if (!nav) return undefined;
 
-    // Use ScrollTrigger to toggle a class when scrolling past 20px.
-    // This completely avoids a window scroll listener.
-    const st = ScrollTrigger.create({
-      start: 20,
-      end: 99999,
-      toggleClass: { targets: nav, className: styles.isScrolled },
-    });
+    const measure = () => {
+      const previousProgress = nav.style.getPropertyValue("--nav-p");
 
-    return () => st.kill();
-  }, []);
+      // Temporarily switch to compact state to measure width, then restore.
+      // The browser never paints the in-between state.
+      nav.style.setProperty("--nav-p", "1");
+      nav.style.width = "max-content";
+      const width = Math.ceil(nav.getBoundingClientRect().width);
+      nav.style.width = "";
+
+      if (previousProgress) {
+        nav.style.setProperty("--nav-p", previousProgress);
+      } else {
+        nav.style.removeProperty("--nav-p");
+      }
+
+      if (width > 0) nav.style.setProperty("--nav-w-compact", `${width}px`);
+    };
+
+    measure();
+
+    // Re-measure when content size changes (cart count, mobile links, fonts, resize).
+    let observer = null;
+    if (typeof ResizeObserver !== "undefined") {
+      observer = new ResizeObserver(measure);
+      if (linksRef.current) observer.observe(linksRef.current);
+      if (actionsRef.current) observer.observe(actionsRef.current);
+    }
+    window.addEventListener("resize", measure);
+    document.fonts?.ready?.then(measure);
+
+    return () => {
+      if (observer) observer.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+    // "reduced" is here on purpose: switching motion modes re-runs the GSAP setup.
+  }, [reduced, totalItems]);
 
   const closeMenu = () => setOpen(false);
 
@@ -50,11 +129,18 @@ export default function Navbar() {
           aria-label="Los Pollos Hermanos, home"
           onClick={closeMenu}
         >
-          <Wordmark size="sm" />
+          <img
+            className={styles.logo}
+            src="/images/chicken-leg.png"
+            alt=""
+            width="32"
+            height="32"
+          />
         </Link>
 
         <ul
           id="primary-links"
+          ref={linksRef}
           className={styles.links}
           data-open={open ? "true" : "false"}
         >
@@ -83,7 +169,7 @@ export default function Navbar() {
           </li>
         </ul>
 
-        <div className={styles.actions}>
+        <div className={styles.actions} ref={actionsRef}>
           <Link
             className={styles.cartLink}
             to="/cart"

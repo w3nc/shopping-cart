@@ -17,6 +17,7 @@ import SectionHeading from "../components/SectionHeading/SectionHeading";
 import Button from "../components/Button/Button";
 import Tag from "../components/Tag/Tag";
 import Photo from "../components/Photo/Photo";
+import { avatars } from "../assets/photos";
 import ScallopEdge from "../components/ScallopEdge/ScallopEdge";
 import Marquee from "../components/Marquee/Marquee";
 import Accordion from "../components/Accordion/Accordion";
@@ -110,7 +111,7 @@ const cardColors = [
   "var(--color-yellow)",
 ];
 const restTilts = ["-1.2deg", "1deg", "-0.6deg"];
-const avatarInitials = ["MV", "DO", "PR"];
+
 
 const directionsUrl =
   "https://www.google.com/maps/search/?api=1&query=1212+South+Valley+Road+Albuquerque+NM";
@@ -123,9 +124,9 @@ function pickFavorites(items) {
 function Avatars() {
   return (
     <span className={styles.avatars} aria-hidden="true">
-      {avatarInitials.map((initials, index) => (
-        <span key={initials} className={styles.avatar} data-tone={index}>
-          {initials}
+      {avatars.map(({ src, alt }, index) => (
+        <span key={alt} className={styles.avatar} data-tone={index}>
+          <img src={src} alt="" width="40" height="40" loading="lazy" decoding="async" />
         </span>
       ))}
     </span>
@@ -184,7 +185,7 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      {/* 1. HERO */}
+
       <section className={styles.hero} aria-labelledby="home-heading">
         <Container className={styles.heroTop}>
           <div className={styles.heroCopy}>
@@ -220,7 +221,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. VALUE STRIP */}
+
       <section className={styles.valueStrip} aria-labelledby="value-heading">
         <ScallopEdge position="top" color="var(--color-surface)" size={32} />
         <Container>
@@ -250,12 +251,12 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* 3. TICKER TAPE */}
+
       <Marquee tilt={-3}>
         <TickerText />
       </Marquee>
 
-      {/* 4. FAVORITES (sticky stack) */}
+
       <section
         id="bestsellers"
         className={styles.section}
@@ -343,7 +344,7 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* 5. WHY US (bento grid) */}
+
       <section
         id="whyus"
         className={styles.section}
@@ -392,16 +393,16 @@ export default function Home() {
             </div>
             <div className={styles.bentoTallPhoto}>
               <Photo
-                name="bucket3"
+                name="fringChicken"
                 sizes="(min-width: 768px) 28vw, 100vw"
-                style={{ objectPosition: "50% 90%" }}
+                style={{ objectPosition: "50% 40%" }}
               />
             </div>
           </Reveal>
         </Container>
       </section>
 
-      {/* 6. TESTIMONIALS */}
+
       <section className={styles.section} aria-labelledby="words-heading">
         <Container>
           <Reveal className={styles.centerHeading} y={32}>
@@ -422,12 +423,12 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* 7. SECOND TICKER */}
+
       <Marquee tilt={2}>
         <TickerText />
       </Marquee>
 
-      {/* 8. VISIT US */}
+
       <section
         id="visitus"
         className={styles.visitSection}
@@ -468,7 +469,7 @@ export default function Home() {
         <ScallopEdge position="bottom" color="var(--color-yellow)" size={32} />
       </section>
 
-      {/* 9. FAQ */}
+
       <section
         id="faq"
         className={styles.faqSection}

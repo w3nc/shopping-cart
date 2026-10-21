@@ -1,10 +1,5 @@
-// Picks a photo for each menu item.
-//
-// The menu file (public/menu.json) still points at the placeholder SVG.
-// Until you put real photos in it, this file maps each dish to the best matching
-// picture we have. If an item in menu.json gets a real image path, that wins.
-//
-// "focus" crops a photo with object-position, "zoom" scales it up.
+// Picks a photo for each menu item. menu.json still points at the placeholder
+// SVG, so this maps each dish to a photo; a real image path in menu.json wins.
 
 const PLACEHOLDER = /placeholder\.svg$/i;
 
@@ -45,6 +40,50 @@ const byTitle = {
   "churro bites": { photo: "logo", altPhoto: "bucket3" },
 };
 
+// Pinned photos win over the image path in menu.json. The card's picture box
+// is 4:3 landscape, so tall photos are cropped; "focus" picks the visible part.
+const pinnedByTitle = {
+  "crispy time combo": { photo: "firstFavorite", altPhoto: null },
+  "pollos wrap": { photo: "wrap", altPhoto: null },
+  "french fries friends": { photo: "fries", altPhoto: null },
+  "hermanos sauce": { photo: "sauce", altPhoto: null },
+  "fresh lemonade": { photo: "lemonade", altPhoto: null },
+  "sweet tea": { photo: "tea", altPhoto: null },
+  "churro bites": { photo: "churro", altPhoto: null },
+  "family combo": { photo: "familyCombo", altPhoto: null },
+  "crispy chicken nuggets": { photo: "nuggets", altPhoto: null },
+
+  "solo crispy meal": { photo: "preview", altPhoto: null },
+  "golden wings": { photo: "wings", altPhoto: null, focus: "50% 52%" },
+  "creamy coleslaw": { photo: "coleslaw", altPhoto: null, focus: "50% 45%" },
+  "mac and cheese": { photo: "macCheese", altPhoto: null, focus: "50% 30%" },
+  "vanilla milkshake": {
+    photo: "milkshake",
+    altPhoto: null,
+    focus: "50% 35%",
+  },
+  "orange mint cooler": {
+    photo: "cooler",
+    altPhoto: null,
+    focus: "50% 52%",
+  },
+  "vanilla soft serve": {
+    photo: "softServe",
+    altPhoto: null,
+    focus: "50% 48%",
+  },
+  "banana pudding cup": {
+    photo: "pudding",
+    altPhoto: null,
+    focus: "50% 45%",
+  },
+  "chocolate brownie": {
+    photo: "brownie",
+    altPhoto: null,
+    focus: "50% 55%",
+  },
+};
+
 const fallback = { photo: "logo", altPhoto: null };
 
 function normalize(title) {
@@ -58,6 +97,11 @@ export function hasRealImage(item) {
 }
 
 export function getMenuPhoto(item) {
+  const pinned = pinnedByTitle[normalize(item?.title)];
+  if (pinned) {
+    return { focus: "50% 50%", zoom: 1, ...pinned };
+  }
+
   if (hasRealImage(item)) {
     return null;
   }

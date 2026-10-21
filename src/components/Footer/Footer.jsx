@@ -63,7 +63,7 @@ export default function Footer() {
 
         <div className={styles.bottom}>
           <p className={styles.copyright}>
-            Los Pollos Hermanos. A made up restaurant for a school project.
+            Los Pollos Hermanos. A made up restaurant inspired by "Breaking Bad" and "BCS" for The Odin Project.
           </p>
           <MotionToggle />
         </div>
